@@ -13,6 +13,7 @@ video {
     top: 0 !important;
     bottom: 0 !important;
     object-fit: cover !important;
+    z-index: 9999999 !important;
     // transform: none !important;
 }
 
