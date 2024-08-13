@@ -15,14 +15,14 @@ document.addEventListener('DOMContentLoaded', function () {
     app = new Vue({
         el: '#app',
         data: {
-            viewPage: 'home',
+            viewPage: 'poster',
             ar_name: localStorage.getItem('ar_name') || false,  //主要紀錄當前是AR1還是AR2
             is_ar: localStorage.getItem('is_ar') || false, //主要用於判斷使否刷新到ar的頁面
             not_first_ar1: localStorage.getItem('not_first_ar1') || false, //主要用於當第一次進入AR1頁面時 又直接刷新到HOME重新到Aa1頁面的狀況
             slidesData: [
                 'assets/images/s1.png',
-                'https://thumb.ac-illust.com/30/306837819e76342840641fd1d53fd2f9_t.jpeg',
-                'assets/images/s1.png'
+                'assets/images/s2.png',
+                'assets/images/s3.png'
             ],
             currentIndex: 0,
             is_viewed: false,
