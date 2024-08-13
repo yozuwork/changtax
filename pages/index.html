@@ -5,21 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>index</title>
-  
+   
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
   </head>
   <body>
      <!-- 背景音乐 -->
-    <audio id="background-music" src="assets/images/bg.mp3" loop >
-      Your browser does not support the audio element.
-    </audio>
-    <div v-if="viewPage === 'arpage' || viewPage === 'arpage02'">
-      <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
-      <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-    </div>
+
+    <audio id="background-music" autoplay loop>
+      <source src="../assets/images/bg.mp3" type="audio/mp3">
+   </audio>
     <div class="mt-7 d-none d-md-block"></div>
     <div class="wrap-content" id="app">
-      
+      <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+      <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
      
       <div class="d-none d-lg-block"><img src="../assets/images/home-title.png" alt=""></div>
         <%- include('./layout/home'); -%>
@@ -37,9 +35,11 @@
         <%- include('./layout/results'); -%>
         <%- include('./layout/fina-page'); -%>
         <div class="d-none d-lg-block"><img src="../assets/images/home-title.png" alt=""></div>
+          
     </div>
     </div>
     <footer class="d-none d-sm-block"></footer>
+  
     <script type="module" src="../main.js"></script>
   </body>
 </html>

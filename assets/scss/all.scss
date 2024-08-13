@@ -45,11 +45,12 @@ $color-contrast-ratio: 4.5 !default;
     overflow-x: hidden;
     margin-left: 0 !important;
     margin-top: 0 !important;
+    background: linear-gradient(180deg, #FFFFFF 0%, #A4D5EE 50%);
   }
 // 其他樣式
 .content {
     width: 375px;
-    height: 680px;
+    height: 780px;
     background-size: cover ;
     background-position: 50% 50%; 
     position: relative ;
@@ -64,7 +65,20 @@ $color-contrast-ratio: 4.5 !default;
     }
    
 }
+// .ar-content{
+//     @include small {
+//         width: 100%;
+//         height: auto;
 
+//         z-index: 10000;
+//         margin-left: 0 !important;
+//         margin-top: 0 !important;
+//     }
+//     @media screen and (max-height:440px) {
+//         min-height: 500px;
+//         overflow-y: hidden !important;
+//     }
+// }
 .cursor-pointer {
     cursor: pointer;
 }

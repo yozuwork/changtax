@@ -2,7 +2,7 @@
 
 
 
-<div v-if="viewPage == 'arpage02'" class="content  d-flex  flex-column align-items-center ">
+<div v-if="viewPage == 'arpage02'" class="content  ar-content d-flex  flex-column align-items-center ">
    
     <div class="ar-img-title  mb-auto pt-4" style="z-index: 3;"><img src="../assets/images/home-title.png" alt=""></div>
     <div class="ar-img-bg w-100 h-100"><img  class="w-100 h-100" src="../assets/images/1points01.png" alt=""></div>
@@ -11,28 +11,31 @@
     </div>
 </div>
 <!-- AR -->
+<!-- AR -->
 <a-scene
-v-if="viewPage == 'arpage02'"
-class="arbox"
+v-if="viewPage == 'arpage02' "
+class="arbox02"
 vr-mode-ui="enabled: false;"
 renderer="logarithmicDepthBuffer: true;"
 embedded
 device-orientation-permission-ui="enabled: false"
 arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+
 <a-nft
-    type='nft'
-    url='https://yozuwork.github.io/WEBARImageTracking2.0/assets/tracking_target/home'
-    smooth='true'
-    smoothCount='10'
-    smoothTolerance='0.01'
-    smoothThreshold='5'
+    type="nft"
+    url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/tracking_target/home"
+    smooth="true"
+    smoothCount="10"
+    smoothTolerance="0.01"
+    smoothThreshold="5"
     image-tracker-2>
     <a-entity
-        gltf-model='https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf'
+        gltf-model="https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf"
         scale="5 5 5"
         position="50 150 0">
     </a-entity>
 </a-nft>
 
-<a-entity v-if="viewPage == 'arpage02'" camera></a-entity>
+
+<a-entity camera></a-entity>
 </a-scene>

@@ -2,18 +2,23 @@ var app;
 var step = 0;
 var is_notified = false;
 var arbox;
+var music;
 
 document.addEventListener('DOMContentLoaded', function () {
     arbox = document.createElement('div');
     arbox.id = 'arbox';
     document.body.appendChild(arbox);
 
-    // adjustVideoSize();
+    // 初始化 music 變數
+    music = document.getElementById('background-music');
 
     app = new Vue({
         el: '#app',
         data: {
-            viewPage: localStorage.getItem('viewPage') || 'home',
+            viewPage: 'home',
+            ar_name: localStorage.getItem('ar_name') || false,  //主要紀錄當前是AR1還是AR2
+            is_ar: localStorage.getItem('is_ar') || false, //主要用於判斷使否刷新到ar的頁面
+            not_first_ar1: localStorage.getItem('not_first_ar1') || false, //主要用於當第一次進入AR1頁面時 又直接刷新到HOME重新到Aa1頁面的狀況
             slidesData: [
                 'assets/images/s1.png',
                 'https://thumb.ac-illust.com/30/306837819e76342840641fd1d53fd2f9_t.jpeg',
@@ -21,7 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
             ],
             currentIndex: 0,
             is_viewed: false,
-            isDisabled: false
+            isDisabled: false,
+            nowStep: false,
         },
         methods: {
             showSlide(index) {
@@ -33,20 +39,54 @@ document.addEventListener('DOMContentLoaded', function () {
             nextSlide() {
                 this.currentIndex = (this.currentIndex + 1) % this.slidesData.length;
             },
-            changeViewPage(page, play) {
-                var music = document.getElementById('background-music');
-                if (play && music.paused) {
+            changeViewPage(page, act) {
+                if (act && music.paused) {
                     music.play();
+                }
+                if (page == 'instructions02') {
+                    localStorage.setItem('ar_name', '');
+                    if (act == 'back') {
+                        localStorage.setItem('not_first_ar1', true);
+                        this.not_first_ar1 = true;
+                    }
+                }
+                if (page == 'arpage') {
+                    if (act == 'back' || this.not_first_ar1 == true) {
+                        localStorage.setItem('not_first_ar1', false);
+                        localStorage.setItem('ar_name', 'arpage');
+                        localStorage.setItem('is_ar', true);
+                        location.reload();
+                    }
+                    this.viewPage = page;
+                    localStorage.setItem('not_first_ar1', true);
+                    this.initAR();
+                }
+                if (page == 'poster') {
+                    localStorage.setItem('ar_name', '');
+                }
+                if (page == 'arpage02' ) {
+                    if (this.currentIndex !== 2 && act == true ) {
+                        alert('請看完每張稅務知識圖卡');
+                        return;
+                    }
+                    localStorage.setItem('ar_name', 'arpage02');
+                    localStorage.setItem('is_ar', true);
+                    location.reload();
+                }
+                if(page == 'video-view' && act == true){
+                    localStorage.setItem('ar_name', 'video-view');
+                    localStorage.setItem('is_ar', true);
+                    
                 }
                 console.log(`Changing viewPage to ${page}`);
                 this.viewPage = page;
-                localStorage.setItem('viewPage', page);
             },
             nextPage() {
                 console.log('nextPage called');
                 if (this.is_viewed) {
                     console.log('is_viewed is true, changing viewPage to qa01');
                     this.changeViewPage('qa01');
+                    music.play();
                 } else {
                     alert('請觀看完影片');
                 }
@@ -77,27 +117,27 @@ document.addEventListener('DOMContentLoaded', function () {
                         document.querySelectorAll('.ansbox').forEach(btn => {
                             btn.disabled = false;
                         });
-                        if (vm.viewPage == 'qa01') {
-                            vm.changeViewPage('qa02');
-                            window.scrollTo(0, 0);
-                        } else if (vm.viewPage == 'qa02') {
-                            vm.changeViewPage('qa03');
-                            window.scrollTo(0, 0);
-                        } else if (vm.viewPage == 'qa03') {
-                            vm.changeViewPage('qa04');
-                            window.scrollTo(0, 0);
-                        } else if (vm.viewPage == 'qa04') {
-                            vm.changeViewPage('qa05');
-                            window.scrollTo(0, 0);
-                        } else if (vm.viewPage == 'qa05') {
-                            vm.changeViewPage('results');
-                            window.scrollTo(0, 0);
+                        switch (vm.viewPage) {
+                            case 'qa01':
+                                vm.changeViewPage('qa02');
+                                break;
+                            case 'qa02':
+                                vm.changeViewPage('qa03');
+                                break;
+                            case 'qa03':
+                                vm.changeViewPage('qa04');
+                                break;
+                            case 'qa04':
+                                vm.changeViewPage('qa05');
+                                break;
+                            case 'qa05':
+                                vm.changeViewPage('results');
+                                break;
                         }
-
+                        window.scrollTo(0, 0);
                         document.querySelectorAll('.ansbox').forEach(btn => {
                             btn.classList.remove('ansbox-active');
                         });
-
                         this.isDisabled = false;
                     }, 1000);
                 } else {
@@ -111,200 +151,177 @@ document.addEventListener('DOMContentLoaded', function () {
                         document.querySelectorAll('.ansbox').forEach(btn => {
                             btn.disabled = false;
                         });
-
                         document.querySelectorAll('.ansbox').forEach(btn => {
                             btn.classList.remove('ansbox-active');
                         });
-
                         this.isDisabled = false;
                     }, 1000);
                 }
             },
-            loadARScripts() {
-                if (!document.getElementById('aframe-script')) {
-                    var aframeScript = document.createElement('script');
-                    aframeScript.id = 'aframe-script';
-                    aframeScript.src = 'https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js';
-                    document.head.appendChild(aframeScript);
-                }
-
-                if (!document.getElementById('arjs-script')) {
-                    var arjsScript = document.createElement('script');
-                    arjsScript.id = 'arjs-script';
-                    arjsScript.src = 'https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js';
-                    document.head.appendChild(arjsScript);
-                }
-            },
-            unloadARScripts() {
-                var aframeScript = document.getElementById('aframe-script');
-                if (aframeScript) {
-                    document.head.removeChild(aframeScript);
-                }
-
-                var arjsScript = document.getElementById('arjs-script');
-                if (arjsScript) {
-                    document.head.removeChild(arjsScript);
-                }
-            },
             initAR() {
-                if (this.viewPage === 'arpage' || this.viewPage === 'arpage02') {
-                    AFRAME.registerComponent('image-tracker-1', {
-                        init: function () {
-                            console.log("image-tracker-1 init");
-                        },
-                        tick: function () {
-                            if (this.el.object3D.visible == true) {
-                                console.log("image-tracker-1 detected");
-                                step = 2;
-                                localStorage.setItem('viewPage', 'poster');
-                                location.reload();
-                            }
+                const vm = this;
+                AFRAME.registerComponent('image-tracker-1', {
+                    init: function () {
+                        console.log("image-tracker-1 init");
+                    },
+                    tick: function () {
+                        if (this.el.object3D.visible) {
+                            localStorage.setItem('ar_name', '');
+                            vm.viewPage = 'poster';
+                            music.play(); // Ensure music plays when changing viewPage to 'poster'
+                            console.log("image-tracker-1 detected");
                         }
-                    });
+                    }
+                });
+            },
+            initAR02() {
+                const vm = this;
+                AFRAME.registerComponent('image-tracker-2', {
+                    init: function () {
+                        console.log("image-tracker-2 init");
+                    },
+                    tick: function () {
+                        if (this.el.object3D.visible) {
+                            localStorage.setItem('ar_name', '');
+                            vm.changeViewPage('video-view', true);
+                            console.log("image-tracker-2 detected");
+                        }
+                    }
+                });
+            },
+            initYouTubePlayers() {
+                var tag = document.createElement('script');
+                tag.src = "https://www.youtube.com/iframe_api";
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-                    AFRAME.registerComponent('image-tracker-2', {
-                        init: function () {
-                            console.log("image-tracker-2 init");
-                        },
-                        tick: function () {
-                            if (this.el.object3D.visible == true) {
-                                console.log("image-tracker-2 detected");
-                                localStorage.setItem('viewPage', 'video-view');
-                                location.reload();
-                            }
-                        }
-                    });
+                window.onYouTubeIframeAPIReady = this.onYouTubeIframeAPIReady;
+            },
+            onYouTubeIframeAPIReady() {
+                this.player1 = new YT.Player('youtubeVideo1', {
+                    events: {
+                        'onStateChange': this.onPlayerStateChange1
+                    }
+                });
+
+                this.player2 = new YT.Player('youtubeVideo2', {
+                    events: {
+                        'onStateChange': this.onPlayerStateChange2
+                    }
+                });
+            },
+            onPlayerStateChange1(event) {
+                if (event.data == YT.PlayerState.ENDED) {
+                    this.video1Completed = true;
+                    console.log("Video 1 completed");
+                    this.checkBothVideosCompleted(event);
                 }
             },
-            updateOverflow() {
-                if (this.viewPage === 'arpage' || this.viewPage === 'arpage02') {
-                    document.documentElement.style.overflow = 'hidden';
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.documentElement.style.overflow = '';
-                    document.body.style.overflow = '';
-                }
-            }
-        },
-        watch: {
-            viewPage(newPage) {
-                var music = document.getElementById('background-music');
-                if(this.viewPage !== 'home') {
-                    music.play();
-                }
-                console.log(`viewPage changed to ${newPage}`);
-                window.scrollTo(0, 0);
-                this.updateOverflow();
-                if (newPage === 'arpage' || newPage === 'arpage02') {
-                    this.loadARScripts();
-                    this.initAR();                  
-                } else {
-                    this.unloadARScripts();
-                }
-            }
-        },
-        mounted() {
-            const validPages = ['arpage', 'arpage02'];
-            if (!validPages.includes(this.viewPage)) {
-                localStorage.setItem('viewPage', 'home');
-            }
-
-            var iframe1 = document.getElementById('youtubeVideo1');
-            var iframe2 = document.getElementById('youtubeVideo2');
-            var player1, player2;
-            var video1Completed = false;
-            var video2TimeWatched = false;
-            var video2StartTime = null;
-
-            function onYouTubeIframeAPIReady() {
-                player1 = new YT.Player(iframe1, {
-                    events: {
-                        'onStateChange': onPlayerStateChange1
-                    }
-                });
-
-                player2 = new YT.Player(iframe2, {
-                    events: {
-                        'onStateChange': onPlayerStateChange2
-                    }
-                });
-            }
-
-            var tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/iframe_api";
-            var firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-            function onPlayerStateChange1(event) {
-                if (event.data == YT.PlayerState.ENDED) {
-                    video1Completed = true;
-                    console.log("Video 1 completed");
-                    checkBothVideosCompleted(event);
-                }
-            }
-
-            function onPlayerStateChange2(event) {
+            onPlayerStateChange2(event) {
                 if (event.data == YT.PlayerState.PLAYING) {
                     console.log("Video 2 is playing");
-                    if (!video2StartTime) {
-                        video2StartTime = new Date().getTime();
-                        setTimeout(checkVideo2Time, 30000);
+                    if (!this.video2StartTime) {
+                        this.video2StartTime = new Date().getTime();
+                        setTimeout(this.checkVideo2Time, 30000); // Check after 30 seconds
                     }
                 }
                 if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
-                    checkBothVideosCompleted(event);
+                    this.checkBothVideosCompleted(event);
                 }
-            }
-
-            function checkVideo2Time() {
+            },
+            checkVideo2Time() {
                 var currentTime = new Date().getTime();
-                var elapsedTime = (currentTime - video2StartTime) / 1000;
+                var elapsedTime = (currentTime - this.video2StartTime) / 1000;
                 if (elapsedTime >= 30) {
-                    video2TimeWatched = true;
+                    this.video2TimeWatched = true;
                     console.log("Video 2 watched for 30 seconds");
-                    checkBothVideosCompleted();
+                    this.checkBothVideosCompleted();
                 }
-            }
-
-            function checkBothVideosCompleted(event) {
+            },
+            checkBothVideosCompleted(event) {
                 console.log("Checking if both videos completed and 30 seconds watched for Video 2");
-                console.log("Video1 Completed: " + video1Completed);
-                console.log("Video2 Watched 30s: " + video2TimeWatched);
-                if (video1Completed && video2TimeWatched) {
-                    app.is_viewed = true;
+                console.log("Video1 Completed: " + this.video1Completed);
+                console.log("Video2 Watched 30s: " + this.video2TimeWatched);
+                if (this.video1Completed && this.video2TimeWatched) {
+                    this.is_viewed = true;
                     if (event && (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED)) {
                         alert("可繼續前往下一關囉");
                     }
                 }
+            },
+        },
+        watch: {
+            viewPage(newPage) {
+                setTimeout(() => {
+                    window.scroll({ top: -1, left: 0, behavior: "smooth" });
+                }, 10); 
+                if (this.viewPage !== 'home') {
+                    music.play();
+                }
+                console.log(`viewPage changed to ${newPage}`);
+                if (newPage === 'video-view') {
+                    this.initYouTubePlayers();
+                }
             }
-
-            window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-
-            document.addEventListener('touchend', function (event) {
+        },
+        mounted() {
+            if(this.is_ar == 'true'){
+                if(this.ar_name == 'arpage'){
+                   localStorage.setItem('is_ar', false);
+                   this.viewPage = 'arpage';  
+                   this.initAR();
+                   music.play();
+                } 
+                else if(this.ar_name == 'arpage02'){
+                    localStorage.setItem('is_ar', false);
+                    this.viewPage = 'arpage02';
+                    this.initAR02();
+                    music.play();
+                }
+                else if(this.ar_name == 'video-view'){
+                    localStorage.setItem('is_ar', false);
+                    this.viewPage = 'video-view';
+                    music.play();
+                }
+            }
+            // Automatically play music if viewPage is not 'home'
+            if (this.viewPage !== 'home') {
+                music.play();
+            }
+            // 添加触摸事件监听器
+            document.addEventListener('touchend', (event) => {
                 var element = event.target;
-
                 if (element.id === 'your-button-id') {
-                    app.nextPage();
+                    this.nextPage();
                 }
             }, false);
+
+            // 當視窗不在頁面的時候 音樂會暫停播放
+            // Adding blur and focus event listeners to pause and play music
+            window.addEventListener('blur', function() {
+                if (!music.paused) {
+                    music.pause();
+                }
+            });
+
+            window.addEventListener('focus', function() {
+                if (app.viewPage !== 'home') {
+                    music.play();
+                }
+            });
+
+            document.addEventListener('visibilitychange', function () {
+                if (document.visibilityState === 'hidden') {
+                    if (!music.paused) {
+                        music.pause();
+                    }
+                }
+                if (document.visibilityState === 'visible') {
+                    if (app.viewPage !== 'home') {
+                        music.play();
+                    }
+                }
+            });
         }
     });
 });
-
-// function adjustVideoSize() {
-//     var video = document.querySelector('a-scene').querySelector('video');
-//     if (video) {
-//         video.style.width = '100vw';
-//         video.style.height = '100vh';
-//         video.style.position = 'absolute';
-//         video.style.top = '0';
-//         video.style.left = '0';
-//         video.style.transform = 'none';
-//         video.style.zIndex = '99999';
-//         video.style.border = 'none';
-//         video.style.overflow = 'hidden';
-//         video.style.objectFit = 'cover';
-//     } else {
-//         setTimeout(adjustVideoSize, 500);
-//     }
-// }

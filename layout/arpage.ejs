@@ -1,43 +1,41 @@
-
-
-
-
-<div v-if="viewPage == 'arpage'" class="content  d-flex  flex-column align-items-center ">
-   
-    <div class="ar-img-title  mb-auto pt-4" style="z-index: 3;"><img src="../assets/images/home-title.png" alt=""></div>
-    <div class="ar-img-bg w-100 h-100"><img  class="w-100 h-100" src="../assets/images/1points01.png" alt=""></div>
-    <div class="d-flex justify-content-center mt-auto pb-5" style="z-index:3">
-        <button  @click="changeViewPage('instructions02')"  class="btn btn-secondary px-9 py-3 mb-5" type="button">返回</button>
+<div v-if="viewPage === 'arpage'" class="content ar-content  d-flex flex-column align-items-center">
+    <div class="ar-img-title mb-auto pt-4" style="z-index: 3;">
+        <img src="../assets/images/home-title.png" alt="Title Image">
+    </div>
+    <div class="ar-img-bg w-100 h-100">
+        <img class="w-100 h-100" src="../assets/images/1points01.png" alt="Background Image">
+    </div>
+    <div class="d-flex justify-content-center mt-auto pb-5 " style="z-index: 3;">
+        <button @click="changeViewPage('instructions02','back')" class="btn btn-secondary px-9 py-3 mb-5" type="button">返回</button>
     </div>
 </div>
+
+
 <!-- AR -->
 <a-scene
-v-if="viewPage == 'arpage'"
+v-if="viewPage == 'arpage' "
 class="arbox"
 vr-mode-ui="enabled: false;"
 renderer="logarithmicDepthBuffer: true;"
 embedded
 device-orientation-permission-ui="enabled: false"
 arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+
 <a-nft
-    type='nft'
-    url='https://yozuwork.github.io/WEBARImageTracking2.0/assets/tracking_target/marker'
-    smooth='true'
-    smoothCount='10'
-    smoothTolerance='0.01'
-    smoothThreshold='5'
+    type="nft"
+    url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/tracking_target/marker"
+    smooth="true"
+    smoothCount="10"
+    smoothTolerance="0.01"
+    smoothThreshold="5"
     image-tracker-1>
     <a-entity
-        gltf-model='https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf'
+        gltf-model="https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf"
         scale="5 5 5"
         position="50 150 0">
     </a-entity>
 </a-nft>
 
-<a-entity v-if="viewPage == 'arpage'" camera></a-entity>
+
+<a-entity camera></a-entity>
 </a-scene>
-
-
-<!----------d---->
-
-
