@@ -22,7 +22,7 @@ function moveOutputPlugin() {
 }
 
 export default defineConfig({
-  base: '/taoyuan2.0/',
+  base: '/',
   plugins: [
     liveReload(['./layout/**/*.ejs', './pages/**/*.ejs', './pages/**/*.html']),
     ViteEjsPlugin(),
