@@ -5,17 +5,17 @@ var arbox;
 var music;
 
 document.addEventListener('DOMContentLoaded', function () {
-    arbox = document.createElement('div');
-    arbox.id = 'arbox';
-    document.body.appendChild(arbox);
-
+    // arbox = document.createElement('div');
+    // arbox.id = 'arbox';
+    // document.body.appendChild(arbox);
+  
     // 初始化 music 變數 ...
     music = document.getElementById('background-music');
 
     app = new Vue({
         el: '#app',
         data: {
-            viewPage: 'home',
+            viewPage: 'video-view',
             ar_name: localStorage.getItem('ar_name') || false,  //主要紀錄當前是AR1還是AR2
             is_ar: localStorage.getItem('is_ar') || false, //主要用於判斷使否刷新到ar的頁面
             not_first_ar1: localStorage.getItem('not_first_ar1') || false, //主要用於當第一次進入AR1頁面時 又直接刷新到HOME重新到Aa1頁面的狀況
