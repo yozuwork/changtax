@@ -2,13 +2,30 @@
 
 
 
-<div v-if="viewPage == 'arpage02'" class="content  ar-content d-flex  flex-column align-items-center ">
-   
-    <div class="ar-img-title  mb-auto pt-4" style="z-index: 3;"><img src="../assets/images/home-title.png" alt=""></div>
-    <div class="ar-img-bg w-100 h-100"><img  class="w-100 h-100" src="../assets/images/1points01.png" alt=""></div>
-    <div class="d-flex justify-content-center mt-auto pb-5" style="z-index:3">
-        <button @click="changeViewPage('poster','back')"  class="btn btn-secondary px-9 py-3 mb-5" type="button">返回</button>
+<div v-if="viewPage === 'arpage02'" class="content ar-content  d-flex flex-column align-items-center">
+    <div class="ar-img-title " style="z-index: 3;">
+        <img src="../assets/images/home-title.png" alt="Title Image">
     </div>
+    <div class="ar-img-bg w-100 h-100">
+        <img class="w-100 h-100" src="../assets/images/1points01.png" alt="Background Image">
+    </div>
+    <div class="btnbox d-flex justify-content-center  " style="z-index: 3;">
+        <div>
+            <button @click="changeViewPage('poster','back')" class="btn-ar  py-3 px-4 btn-secondary  me-2 " type="button">
+                上一步
+            </button>
+        </div>
+        <div class="text-center">
+            <button @click="changeViewPage('video-view')" class="btn-ar btn-primary py-3  px-4  d-flex justify-content-center align-items-center" type="button">
+                前往下一關<br>
+            </button>
+            <span class="text-light">(不掃描直接繼續)</span>
+        </div>
+
+      
+    </div>
+    
+    <!-- <video  src="../assets/images/demo.mp4"  autoplay loop muted playsinline></video> -->
 </div>
 <!-- AR -->
 <!-- AR -->

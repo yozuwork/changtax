@@ -15,14 +15,14 @@ document.addEventListener('DOMContentLoaded', function () {
     app = new Vue({
         el: '#app',
         data: {
-            viewPage: 'home',
+            viewPage: 'poster',
             ar_name: localStorage.getItem('ar_name') || false,  //主要紀錄當前是AR1還是AR2
             is_ar: localStorage.getItem('is_ar') || false, //主要用於判斷使否刷新到ar的頁面
             not_first_ar1: localStorage.getItem('not_first_ar1') || false, //主要用於當第一次進入AR1頁面時 又直接刷新到HOME重新到Aa1頁面的狀況
             slidesData: [
-                'assets/images/s1.png',
-                'assets/images/s2.png',
-                'assets/images/s3.png'
+                '../assets/images/s1.png',
+                '../assets/images/s2.png',
+                '../assets/images/s3.png'
             ],
             currentIndex: 0,
             is_viewed: false,
@@ -31,13 +31,35 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         methods: {
             showSlide(index) {
-                this.currentIndex = index;
+                if (index === this.slidesData.length - 1) {
+                    // If the last slide is selected, show the alert and set is_viewed to true
+                    alert('已經可以前往下一關囉');
+                    this.is_viewed = true;
+                }
+                
+                if (this.currentIndex === this.slidesData.length - 1) {
+                    // If on the last slide, allow the visual change but do not update currentIndex
+                    document.querySelectorAll('.slide').forEach((slide, i) => {
+                        if (i === index) {
+                            slide.classList.add('active'); // Add active class to the clicked slide
+                        } else {
+                            slide.classList.remove('active'); // Remove active class from other slides
+                        }
+                    });
+                } else {
+                    this.currentIndex = index; // Update currentIndex if not on the last slide
+                }
             },
             prevSlide() {
                 this.currentIndex = (this.currentIndex - 1 + this.slidesData.length) % this.slidesData.length;
             },
             nextSlide() {
-                this.currentIndex = (this.currentIndex + 1) % this.slidesData.length;
+                if (this.currentIndex < this.slidesData.length - 1) {
+                    this.currentIndex++;
+                } else {
+                    alert('已經可以前往下一關囉');
+                    this.is_viewed = true; // You can also set this to enable the next action.
+                }
             },
             changeViewPage(page, act) {
                 if (act && music.paused) {
