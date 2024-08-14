@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     arbox.id = 'arbox';
     document.body.appendChild(arbox);
 
-    // 初始化 music 變數
+    // 初始化 music 變數 ...
     music = document.getElementById('background-music');
 
     app = new Vue({
