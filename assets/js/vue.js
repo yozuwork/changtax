@@ -283,7 +283,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(() => {
                     window.scroll({ top: -1, left: 0, behavior: "smooth" });
                 }, 10); 
-                if (this.viewPage !== 'home') {
+                if (newPage === 'home') {
+                    // 如果切换到 home 页面，重置音乐并停止播放
+                    music.currentTime = 0;
+                    music.pause();
+                } else {
+                    // 切换到其他页面时，继续播放音乐
                     music.play();
                 }
                 console.log(`viewPage changed to ${newPage}`);
