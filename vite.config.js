@@ -42,7 +42,7 @@ function htmlVersioningPlugin() {
 }
 
 export default defineConfig({
-  base: '/',
+  base: '/changtax/',
   plugins: [
     liveReload(['./layout/**/*.ejs', './pages/**/*.ejs', './pages/**/*.html']),
     ViteEjsPlugin(),

@@ -26,30 +26,7 @@
 
 
 <!-- AR --->
-<a-scene
-v-if="viewPage == 'arpage' "
-class="arbox"
-vr-mode-ui="enabled: false;"
-renderer="logarithmicDepthBuffer: true;"
-embedded
-device-orientation-permission-ui="enabled: false"
-arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
-
-<a-nft
-    type="nft"
-    url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/tracking_target/marker"
-    smooth="true"
-    smoothCount="10"
-    smoothTolerance="0.01"
-    smoothThreshold="5"
-    image-tracker-1>
-    <a-entity
-        gltf-model="https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf"
-        scale="5 5 5"
-        position="50 150 0">
-    </a-entity>
-</a-nft>
+ <div class="arpage01">
 
 
-<a-entity camera></a-entity>
-</a-scene>
+ </div>

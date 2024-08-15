@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
     app = new Vue({
         el: '#app',
         data: {
-            viewPage: 'video-view',
-            ar_name: localStorage.getItem('ar_name') || false,  //主要紀錄當前是AR1還是AR2
-            is_ar: localStorage.getItem('is_ar') || false, //主要用於判斷使否刷新到ar的頁面
-            not_first_ar1: localStorage.getItem('not_first_ar1') || false, //主要用於當第一次進入AR1頁面時 又直接刷新到HOME重新到Aa1頁面的狀況
+            viewPage: 'home',
+            KeepPage_name: localStorage.getItem('KeepPage_name') || false,  //主要紀錄要保持的頁面
+            keepPage: localStorage.getItem('keepPage') || false, // 此為在ar頁面 切換時的上下頁是否在刷新後保持當前頁面 
+           
             slidesData: [
                 'assets/images/s1.png',
                 'assets/images/s2.png',
@@ -66,38 +66,39 @@ document.addEventListener('DOMContentLoaded', function () {
                     music.play();
                 }
                 if (page == 'instructions02') {
-                    localStorage.setItem('ar_name', '');
-                    if (act == 'back') {
-                        localStorage.setItem('not_first_ar1', true);
-                        this.not_first_ar1 = true;
-                    }
+                    localStorage.setItem('KeepPage_name', 'instructions02');
+                    localStorage.setItem('keepPage', true);
+                    location.reload();
                 }
                 if (page == 'arpage') {
-                    if (act == 'back' || this.not_first_ar1 == true) {
-                        localStorage.setItem('not_first_ar1', false);
-                        localStorage.setItem('ar_name', 'arpage');
-                        localStorage.setItem('is_ar', true);
-                        location.reload();
-                    }
-                    this.viewPage = page;
-                    localStorage.setItem('not_first_ar1', true);
-                    this.initAR();
+                    localStorage.setItem('KeepPage_name', 'arpage');
+                    localStorage.setItem('keepPage', true);
+                    location.reload();
                 }
                 if (page == 'poster') {
-                    localStorage.setItem('ar_name', '');
+                    localStorage.setItem('KeepPage_name', 'poster');
+                    localStorage.setItem('keepPage', true);
+                    location.reload();
+                    
+                   
                 }
-                if (page == 'arpage02' ) {
+                if (page == 'arpage02' ) { 
+                    
+
                     if (this.currentIndex !== 2 && act == true ) {
                         alert('請看完每張稅務知識圖卡');
                         return;
                     }
-                    localStorage.setItem('ar_name', 'arpage02');
-                    localStorage.setItem('is_ar', true);
+                 
+                    localStorage.setItem('KeepPage_name', 'arpage02');
+                    localStorage.setItem('keepPage', true);
                     location.reload();
                 }
-                if(page == 'video-view' && act == true){
-                    localStorage.setItem('ar_name', 'video-view');
-                    localStorage.setItem('is_ar', true);
+                if(page == 'video-view'){
+                   
+                    localStorage.setItem('KeepPage_name', 'video-view');
+                    localStorage.setItem('keepPage', true);
+                    location.reload();
                     
                 }
                 console.log(`Changing viewPage to ${page}`);
@@ -188,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     tick: function () {
                         if (this.el.object3D.visible) {
-                            localStorage.setItem('ar_name', '');
+                            localStorage.setItem('KeepPage_name', '');
                             vm.viewPage = 'poster';
                             music.play(); // Ensure music plays when changing viewPage to 'poster'
                             console.log("image-tracker-1 detected");
@@ -204,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     tick: function () {
                         if (this.el.object3D.visible) {
-                            localStorage.setItem('ar_name', '');
+                            localStorage.setItem('KeepPage_name', '');
                             vm.changeViewPage('video-view', true);
                             console.log("image-tracker-2 detected");
                         }
@@ -287,21 +288,91 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         },
         mounted() {
-            if(this.is_ar == 'true'){
-                if(this.ar_name == 'arpage'){
-                   localStorage.setItem('is_ar', false);
+            if(this.keepPage == 'true'){
+                if(this.KeepPage_name == 'arpage'){
+                   localStorage.setItem('keepPage', false);
                    this.viewPage = 'arpage';  
+                   const arpage01 = document.querySelector('.arpage01');
+                   arpage01.innerHTML = `
+                    <a-scene
+                        v-if="viewPage == 'arpage' "
+                        class="arbox"
+                        vr-mode-ui="enabled: false;"
+                        renderer="logarithmicDepthBuffer: true;"
+                        embedded
+                        device-orientation-permission-ui="enabled: false"
+                        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+
+                        <a-nft
+                            type="nft"
+                            url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/tracking_target/marker"
+                            smooth="true"
+                            smoothCount="10"
+                            smoothTolerance="0.01"
+                            smoothThreshold="5"
+                            image-tracker-1>
+                            <a-entity
+                                gltf-model="https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf"
+                                scale="5 5 5"
+                                position="50 150 0">
+                            </a-entity>
+                        </a-nft>
+
+
+                        <a-entity camera></a-entity>
+                        </a-scene>
+                   `;
                    this.initAR();
                    music.play();
                 } 
-                else if(this.ar_name == 'arpage02'){
-                    localStorage.setItem('is_ar', false);
+                else if(this.KeepPage_name == 'arpage02'){
+                    localStorage.setItem('keepPage', false);
                     this.viewPage = 'arpage02';
+                    const arpage02 = document.querySelector('.arpage02');
+                    arpage02.innerHTML = `
+                         <a-scene
+                        v-if="viewPage == 'arpage02' "
+                        class="arbox02"
+                        vr-mode-ui="enabled: false;"
+                        renderer="logarithmicDepthBuffer: true;"
+                        embedded
+                        device-orientation-permission-ui="enabled: false"
+                        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+
+                        <a-nft
+                            type="nft"
+                            url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/tracking_target/home"
+                            smooth="true"
+                            smoothCount="10"
+                            smoothTolerance="0.01"
+                            smoothThreshold="5"
+                            image-tracker-2>
+                            <a-entity
+                                gltf-model="https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf"
+                                scale="5 5 5"
+                                position="50 150 0">
+                            </a-entity>
+                        </a-nft>
+
+
+                        <a-entity camera></a-entity>
+                        </a-scene>
+                    `;
                     this.initAR02();
                     music.play();
                 }
-                else if(this.ar_name == 'video-view'){
-                    localStorage.setItem('is_ar', false);
+                else if(this.KeepPage_name == 'instructions02'){
+                    localStorage.setItem('keepPage', false);
+                    this.viewPage = 'instructions02';
+                    music.play();
+                }
+                else if(this.KeepPage_name == 'poster'){
+                    localStorage.setItem('keepPage', false);
+                    this.viewPage = 'poster';
+                    music.play();
+                }
+                else if(this.KeepPage_name == 'video-view'){
+                    localStorage.setItem('keepPage', false);
                     this.viewPage = 'video-view';
                     music.play();
                 }
