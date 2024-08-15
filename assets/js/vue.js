@@ -5,12 +5,15 @@ var arbox;
 var music;
 
 document.addEventListener('DOMContentLoaded', function () {
-    // arbox = document.createElement('div');
-    // arbox.id = 'arbox';
-    // document.body.appendChild(arbox);
-  
-    // 初始化 music 變數 ...
     music = document.getElementById('background-music');
+
+    // 获取保存的播放时间
+    const savedTime = localStorage.getItem('musicCurrentTime');
+
+    if (savedTime) {
+        // 设置音乐播放到保存的时间
+        music.currentTime = parseFloat(savedTime);
+    }
 
     app = new Vue({
         el: '#app',
@@ -66,9 +69,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     music.play();
                 }
                 if (page == 'instructions02') {
-                    localStorage.setItem('KeepPage_name', 'instructions02');
-                    localStorage.setItem('keepPage', true);
-                    location.reload();
+                    if(act == 'back'){
+                        localStorage.setItem('KeepPage_name', 'instructions02');
+                        localStorage.setItem('keepPage', true);
+                        location.reload();
+                    } 
                 }
                 if (page == 'arpage') {
                     localStorage.setItem('KeepPage_name', 'arpage');
@@ -381,6 +386,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (this.viewPage !== 'home') {
                 music.play();
             }
+            // 当窗口或页面刷新时，保存当前播放时间
+            window.addEventListener('beforeunload', function () {
+                localStorage.setItem('musicCurrentTime', music.currentTime);
+            });
             // 添加触摸事件监听器
             document.addEventListener('touchend', (event) => {
                 var element = event.target;
