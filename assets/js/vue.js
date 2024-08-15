@@ -18,10 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
     app = new Vue({
         el: '#app',
         data: {
-            viewPage: 'home',
+            viewPage: 'results',
             KeepPage_name: localStorage.getItem('KeepPage_name') || false,  //主要紀錄要保持的頁面
             keepPage: localStorage.getItem('keepPage') || false, // 此為在ar頁面 切換時的上下頁是否在刷新後保持當前頁面 
-           
+            phone_number: '',
+            serial_number:'',
             slidesData: [
                 'assets/images/s1.png',
                 'assets/images/s2.png',
@@ -185,6 +186,26 @@ document.addEventListener('DOMContentLoaded', function () {
                         this.isDisabled = false;
                     }, 1000);
                 }
+            },
+            getLotteryResults(){
+                const vm = this;
+                alert(`你的末五碼是: ${this.phone_number}`);
+                fetch('https://changtax-postcard.netmet.tech/serial_number.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ lastFiveDigits: this.phone_number })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    vm.serial_number = data.serialNumber;
+                    console.log('流水號:', data.serialNumber);
+                    vm.viewPage = 'fina-page';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
             },
             initAR() {
                 const vm = this;
