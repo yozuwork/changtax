@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         methods: {
             showSlide(index) {
                 if (index === this.slidesData.length - 1) {
-                    // If the last slide is selected, show the alert and set is_viewed to true
+                    // If the last slide is selected, show the alert and set is_viewed to true /
                     alert('已經可以前往下一關囉');
                     this.is_viewed = true;
                 }
