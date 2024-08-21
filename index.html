@@ -7,21 +7,21 @@
     <title>index</title>
    
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-    <script type="module" crossorigin src="/assets/images/index.js?v=1724228558642"></script>
-    <link rel="stylesheet" href="/assets/images/index.css?v=1724228558642">
+    <script type="module" crossorigin src="/changtax/assets/images/index.js?v=1724228671974"></script>
+    <link rel="stylesheet" href="/changtax/assets/images/index.css?v=1724228671974">
   </head>
   <body>
      <!-- 背景音乐 -->
 
     <audio id="background-music"  loop>
-      <source src="/assets/images/bg.mp3" type="audio/mp3">
+      <source src="/changtax/assets/images/bg.mp3" type="audio/mp3">
    </audio>
     <div class="mt-7 d-none d-md-block"></div>
     <div class="wrap-content" id="app">
-      <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js?v=1724228558642"></script>
-      <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js?v=1724228558642"></script>
+      <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js?v=1724228671974"></script>
+      <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js?v=1724228671974"></script>
      
-      <div class="d-none d-lg-block"><img src="/assets/images/home-title.png" alt=""></div>
+      <div class="d-none d-lg-block"><img src="/changtax/assets/images/home-title.png" alt=""></div>
         <div v-if="viewPage == 'home'" class="content home d-flex justify-content-end flex-column mb-0 mb-mb-5" >
     <div class="d-flex justify-content-center">
         <button @click="changeViewPage('instructions01',true)" class="btn btn-primary px-9 py-3 mb-5" type="button">
@@ -49,7 +49,7 @@
     </div>
 </div>        <div v-if="viewPage === 'arpage'" class="content ar-content  d-flex flex-column align-items-center">
     <div class="ar-img-title " style="z-index: 3;">
-        <img src="/assets/images/home-title.png" alt="Title Image">
+        <img src="/changtax/assets/images/home-title.png" alt="Title Image">
     </div>
     <div class="ar-img-bg w-100 h-100">
         <img class="w-100 h-100" src="data:image/png;base64,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JO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEH/BwfwkKeTWgBeAAAAAElFTkSuQmCC" alt="Background Image">
@@ -108,7 +108,7 @@
 
 <div v-if="viewPage === 'arpage02'" class="content ar-content  d-flex flex-column align-items-center">
     <div class="ar-img-title " style="z-index: 3;">
-        <img src="/assets/images/home-title.png" alt="Title Image">
+        <img src="/changtax/assets/images/home-title.png" alt="Title Image">
     </div>
     <div class="ar-img-bg w-100 h-100">
         <img class="w-100 h-100" src="data:image/png;base64,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JO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEHiDhAk7gBB4g4QJO4AQeIOECTuAEH/BwfwkKeTWgBeAAAAAElFTkSuQmCC" alt="Background Image">
@@ -160,8 +160,8 @@
         <div v-if="viewPage === 'qa01'">
     
     <div class="content poster d-flex justify-content-start flex-column align-items-center">
-        <div class="resultbox correct" style="z-index: 999;"> <img src="/assets/images/correct.png" alt=""></div>
-        <div class="resultbox mistake" style="z-index: 999;"> <img src="/assets/images/mistake.png" alt=""></div>
+        <div class="resultbox correct" style="z-index: 999;"> <img src="/changtax/assets/images/correct.png" alt=""></div>
+        <div class="resultbox mistake" style="z-index: 999;"> <img src="/changtax/assets/images/mistake.png" alt=""></div>
         <div style="width: 95%;">
             <div>
                 <h1 class="h3 text-center text-light py-4 mt-2">- 租稅互動問答 -</h1>
@@ -198,8 +198,8 @@
         <div v-if="viewPage === 'qa02'">
     
     <div class="content poster d-flex justify-content-start flex-column align-items-center">
-        <div class="resultbox correct" style="z-index: 999;"> <img src="/assets/images/correct.png" alt=""></div>
-        <div class="resultbox mistake" style="z-index: 999;"> <img src="/assets/images/mistake.png" alt=""></div>
+        <div class="resultbox correct" style="z-index: 999;"> <img src="/changtax/assets/images/correct.png" alt=""></div>
+        <div class="resultbox mistake" style="z-index: 999;"> <img src="/changtax/assets/images/mistake.png" alt=""></div>
         <div style="width: 95%;">
             <div>
                 <h1 class="h3 text-center text-light py-4 mt-2">- 租稅互動問答 -</h1>
@@ -236,8 +236,8 @@
         <div v-if="viewPage === 'qa03'">
     
     <div class="content poster d-flex justify-content-start flex-column align-items-center">
-        <div class="resultbox correct" style="z-index: 999;"> <img src="/assets/images/correct.png" alt=""></div>
-        <div class="resultbox mistake" style="z-index: 999;"> <img src="/assets/images/mistake.png" alt=""></div>
+        <div class="resultbox correct" style="z-index: 999;"> <img src="/changtax/assets/images/correct.png" alt=""></div>
+        <div class="resultbox mistake" style="z-index: 999;"> <img src="/changtax/assets/images/mistake.png" alt=""></div>
         <div style="width: 95%;">
             <div>
                 <h1 class="h3 text-center text-light py-4 mt-2">- 租稅互動問答 -</h1>
@@ -276,8 +276,8 @@
         <div v-if="viewPage === 'qa04'">
     
     <div class="content poster d-flex justify-content-start flex-column align-items-center">
-        <div class="resultbox correct" style="z-index: 999;"> <img src="/assets/images/correct.png" alt=""></div>
-        <div class="resultbox mistake" style="z-index: 999;"> <img src="/assets/images/mistake.png" alt=""></div>
+        <div class="resultbox correct" style="z-index: 999;"> <img src="/changtax/assets/images/correct.png" alt=""></div>
+        <div class="resultbox mistake" style="z-index: 999;"> <img src="/changtax/assets/images/mistake.png" alt=""></div>
         <div style="width: 95%;">
             <div>
                 <h1 class="h3 text-center text-light py-4 mt-2">- 租稅互動問答 -</h1>
@@ -314,8 +314,8 @@
         <div v-if="viewPage === 'qa05'">
     
     <div class="content poster d-flex justify-content-start flex-column align-items-center">
-        <div class="resultbox correct" style="z-index: 999;"> <img src="/assets/images/correct.png" alt=""></div>
-        <div class="resultbox mistake" style="z-index: 999;"> <img src="/assets/images/mistake.png" alt=""></div>
+        <div class="resultbox correct" style="z-index: 999;"> <img src="/changtax/assets/images/correct.png" alt=""></div>
+        <div class="resultbox mistake" style="z-index: 999;"> <img src="/changtax/assets/images/mistake.png" alt=""></div>
         <div style="width: 95%;">
             <div>
                 <h1 class="h3 text-center text-light py-4 mt-2">- 租稅互動問答 -</h1>
@@ -346,7 +346,7 @@
 </div>
 
         <div class="content poster d-flex flex-column align-items-center" v-if="viewPage === 'results'">
-    <div class="mt-4"><img src="/assets/images/home-title.png" alt=""></div>
+    <div class="mt-4"><img src="/changtax/assets/images/home-title.png" alt=""></div>
     <div class="results-text mt-3 pt-2 pb-3 px-3 text-light mb-3 d-flex flex-column align-items-center">
         <p class="fs-5">恭喜您完成答題</p>
         <p>請填寫抽獎人聯絡手機末五碼</p>
@@ -374,12 +374,12 @@
 
         
 <div class="content poster d-flex flex-column align-items-center" v-if="viewPage === 'fina-page'">
-    <div class="mt-4"><img src="/assets/images/home-title.png" alt=""></div>
+    <div class="mt-4"><img src="/changtax/assets/images/home-title.png" alt=""></div>
     <div class="results-text mt-3 pt-2 pb-3 px-3 text-light mb-3 d-flex flex-column align-items-center">
         <p class="fs-5 py-3">抽獎流水號</p>
         <div class="py-3 px-3 text-center lottery text-dark d-flex justify-content-center">
             <div class="paste-text d-inline-block ms-auto"  id="sourceDiv">{{ serial_number }}</div> 
-            <div class="btn-paste d-inline-block ms-auto" onclick="copyDivText()" ><img  class="paste" src="/assets/images/paste.svg"></div>
+            <div class="btn-paste d-inline-block ms-auto" onclick="copyDivText()" ><img  class="paste" src="/changtax/assets/images/paste.svg"></div>
         </div>
     </div>
     <div class="text-start text-shadow text-light" style="width: 95%; font-size: 14px;">
@@ -422,7 +422,7 @@
 }
 </script>    
 
-        <div class="d-none d-lg-block"><img src="/assets/images/home-title.png" alt=""></div>
+        <div class="d-none d-lg-block"><img src="/changtax/assets/images/home-title.png" alt=""></div>
           
     </div>
     </div>
