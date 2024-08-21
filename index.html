@@ -7,8 +7,8 @@
     <title>index</title>
    
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-    <script type="module" crossorigin src="/changtax/assets/images/index.js?v=1724229330773"></script>
-    <link rel="stylesheet" href="/changtax/assets/images/index.css?v=1724229330773">
+    <script type="module" crossorigin src="/changtax/assets/images/index.js?v=1724230122352"></script>
+    <link rel="stylesheet" href="/changtax/assets/images/index.css?v=1724230122352">
   </head>
   <body>
      <!-- 背景音乐 -->
@@ -16,10 +16,10 @@
     <audio id="background-music"  loop>
       <source src="/changtax/assets/images/bg.mp3" type="audio/mp3">
    </audio>
-    <div class="mt-7 d-none d-md-block"></div>
+    <div class="mt-0 mt-lg-7 d-none d-md-block"></div>
     <div class="wrap-content" id="app">
-      <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js?v=1724229330773"></script>
-      <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js?v=1724229330773"></script>
+      <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js?v=1724230122352"></script>
+      <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js?v=1724230122352"></script>
      
       <div class="d-none d-lg-block"><img src="/changtax/assets/images/home-title.png" alt=""></div>
         <div v-if="viewPage == 'home'" class="content home d-flex justify-content-end flex-column mb-0 mb-mb-5" >
@@ -29,7 +29,7 @@
         </button>
     </div>
 </div>
-<!-- -->        <div v-if="viewPage == 'instructions01'" class="content instructions01 d-flex justify-content-end flex-column md-0 mb-md-5" >
+<!-- -->        <div v-if="viewPage == 'instructions01'" class="content instructions01 d-flex justify-content-end flex-column md-0 mb-lg-5" >
     <div class="d-flex justify-content-center">
         <button @click="changeViewPage('home')" class="btn btn-sm btn-secondary py-3 mb-5 me-3 d-flex justify-content-center align-items-center" type="button">
             上一步
@@ -38,7 +38,7 @@
             下一步
         </button>
     </div>
-</div>        <div v-if="viewPage == 'instructions02'" class="content instructions02 d-flex justify-content-end flex-column md-0 mb-md-5" >
+</div>        <div v-if="viewPage == 'instructions02'" class="content instructions02 d-flex justify-content-end flex-column md-0 mb-lg-5" >
     <div class="d-flex justify-content-center">
         <button @click="changeViewPage('instructions01')" class="btn btn-sm btn-secondary py-3 mb-5 me-3 d-flex justify-content-center align-items-center" type="button">
             上一步
@@ -72,7 +72,7 @@
     
     
 </div>
-
+<!-- <video src="../assets/images/demo.mp4"></video> -->
 
 <!-- AR ---->
  <div class="arpage01">
@@ -426,7 +426,7 @@
           
     </div>
     </div>
-    <footer class="d-none d-sm-block"></footer>
+    <footer ></footer>
   
     
   </body>
