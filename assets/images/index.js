@@ -6,7 +6,7 @@
                     renderer="logarithmicDepthBuffer: true;"
                     embedded
                     device-orientation-permission-ui="enabled: false"
-                    arjs="trackingMethod: multiple; sourceType: webcam; debugUIEnabled: false;">
+                    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
 
                     <a-nft
                         type="nft"
@@ -23,7 +23,8 @@
                         </a-entity>
                     </a-nft>
 
-                    <a-entity camera></a-entity>
+                    <a-entity camera="active: true" look-controls wasd-controls position="0 1.6 0" data-aframe-default-camera></a-entity>
+
                 </a-scene>
                    `,this.initAR(),i.play()}else if(this.KeepPage_name=="arpage02"){localStorage.setItem("keepPage",!1),this.viewPage="arpage02";const e=document.querySelector(".arpage02");e.innerHTML=`
                          <a-scene
