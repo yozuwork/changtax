@@ -2,21 +2,33 @@
 .ar-img-bg{
     position: absolute;
     @include size(100%, 100%);
+    z-index: 3 !important;
+
 }
 video {
     width: 375px !important;
-    height: 680px !important;
+    height: 100% !important;
     position: absolute !important;
     left: 0 !important;
     right: 0 !important;
     margin: auto !important;
     top: 0 !important;
-    bottom: 0 !important;
+    // bottom: 24% !important;
+    bottom:0 !important;
     object-fit: cover !important;
     z-index: 2 !important;
+    @include large-medium {
+        width: 550px !important;
+        padding-bottom: 0px;
+    }
     @media screen and (max-width: 576px) {
         width:  100% !important;
         height: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin: auto !important;
+        top: 0 !important;
+        bottom: 0 !important;
         
     }
     // transform: none !important; ...
@@ -42,3 +54,16 @@ video {
 .ar-img img{
     width: 100%;
 }
+
+.scan-hint {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    z-index: 9999999;
+  }

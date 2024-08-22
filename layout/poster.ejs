@@ -6,7 +6,7 @@
                 <img :src="imageSrc" />
             </div>
         </div>
-        <div class="buttons  d-flex justify-content-center">
+        <div class="buttons  d-flex justify-content-center" style="margin-bottom:150px">
             <button id="prevBtn" class="swiper-button" @click="prevSlide">&lt;</button>
             <span id="slideButtons">
                 <button v-for="(imageSrc, index) in slidesData" :key="index" class="swiper-button" :class="{ 'active-button': index <= currentIndex }" @click="showSlide(index)">

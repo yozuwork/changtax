@@ -52,7 +52,10 @@ footer{
   height: 90px;
   position: absolute;
   bottom: 0;
- 
+  @include large-medium {
+    display: none ;
+   
+ }
 
 }
 

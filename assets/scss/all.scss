@@ -56,7 +56,12 @@ $color-contrast-ratio: 4.5 !default;
     position: relative ;
     overflow-x: hidden;
     padding-bottom: 20px;
- 
+    @include large-medium {
+        width: 550px;
+        min-height: 100svh;
+        padding-bottom: 0px;
+
+    }
     @include small {
         width: 100%;
         min-height: 100svh;
@@ -66,6 +71,7 @@ $color-contrast-ratio: 4.5 !default;
     }
    
 }
+
 .ar-content{
     @include small {
         width: 100%;

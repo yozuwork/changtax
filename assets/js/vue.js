@@ -14,11 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
         // 设置音乐播放到保存的时间
         music.currentTime = parseFloat(savedTime);
     }
+    
 
     app = new Vue({
         el: '#app',
         data: {
-            viewPage: 'home',
+            viewPage: 'arpage',
             KeepPage_name: localStorage.getItem('KeepPage_name') || false,  //主要紀錄要保持的頁面
             keepPage: localStorage.getItem('keepPage') || false, // 此為在ar頁面 切換時的上下頁是否在刷新後保持當前頁面 
             phone_number: '',
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
             is_viewed: false,
             isDisabled: false,
             nowStep: false,
+            isTargetDetected: false, 
         },
         methods: {
             showSlide(index) {
@@ -298,6 +300,37 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
             },
+            handleFocus() {
+                // 獲取相機流
+                const videoElement = document.querySelector('video');
+                if (videoElement && 'srcObject' in videoElement) {
+                    const track = videoElement.srcObject.getVideoTracks()[0];
+                    const capabilities = track.getCapabilities();
+            
+                    // 檢查是否支持對焦距離
+                    if (capabilities.focusDistance) {
+                        const settings = track.getSettings();
+                        // 將對焦設置為自動或設置為一個特定的值
+                        track.applyConstraints({
+                            advanced: [{ focusMode: 'continuous' }] // 自動對焦
+                        }).then(() => {
+                            console.log('自動對焦已啟用');
+                        }).catch(error => {
+                            console.error('無法設置自動對焦:', error);
+                        });
+                    } else {
+                        console.log('該設備不支持對焦控制');
+                    }
+                } else {
+                    console.log('無法獲取相機流或相機不支持');
+                }
+            },
+            handleMarkerFound() {
+                this.isTargetDetected = true; // 當偵測到目標時隱藏提示
+            },
+            handleMarkerLost() {
+            this.isTargetDetected = false; // 當失去目標時再次顯示提示
+            },
         },
         watch: {
             viewPage(newPage) {
@@ -325,34 +358,35 @@ document.addEventListener('DOMContentLoaded', function () {
                    this.viewPage = 'arpage';  
                    const arpage01 = document.querySelector('.arpage01');
                    arpage01.innerHTML = `
-                    <a-scene
-                        v-if="viewPage == 'arpage' "
-                        class="arbox"
-                        vr-mode-ui="enabled: false;"
-                        renderer="logarithmicDepthBuffer: true;"
-                        embedded
-                        device-orientation-permission-ui="enabled: false"
-                        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+                 <a-scene
+                    id="myARScene"
+                    class="arbox"
+                    vr-mode-ui="enabled: false;"
+                    renderer="logarithmicDepthBuffer: true;"
+                    embedded
+                    device-orientation-permission-ui="enabled: false"
+                    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_color; maxDetectionRate: 60;">
+                    <a-nft
+                        type="nft"
+                        url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/tracking_target/marker"
+                        smooth="true"
+                        smoothCount="2"
+                        smoothTolerance="0.01"
+                        smoothThreshold="0.5"
+                        @markerFound="handleMarkerFound"
+                        @markerLost="handleMarkerLost"
+                        image-tracker-1>
+                        <a-entity
+                            gltf-model="https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf"
+                            scale="5 5 5"
+                            position="0 200 -100">
+                        </a-entity>
+                    </a-nft>
+                    <a-marker-camera></a-marker-camera>
+                </a-scene>
 
-                        <a-nft
-                            type="nft"
-                            url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/tracking_target/marker"
-                            smooth="true"
-                            smoothCount="10"
-                            smoothTolerance="0.01"
-                            smoothThreshold="5"
-                            image-tracker-1>
-                            <a-entity
-                                gltf-model="https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf"
-                                scale="5 5 5"
-                                position="50 150 0">
-                            </a-entity>
-                        </a-nft>
-
-
-                        <a-entity camera></a-entity>
-                        </a-scene>
                    `;
+               
                    this.initAR();
                    music.play();
                 } 
