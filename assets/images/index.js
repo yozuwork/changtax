@@ -6,7 +6,7 @@
                     renderer="logarithmicDepthBuffer: true;"
                     embedded
                     device-orientation-permission-ui="enabled: false"
-                    arjs="trackingMethod: single; sourceType: webcam; debugUIEnabled: false;">
+                    arjs="trackingMethod: multiple; sourceType: webcam; debugUIEnabled: false;">
 
                     <a-nft
                         type="nft"
