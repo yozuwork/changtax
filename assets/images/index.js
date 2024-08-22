@@ -9,7 +9,7 @@
                     arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_color; maxDetectionRate: 60;"
                     @touchstart="handleFocus">
                      <!-- 提示文字 -->
-                    <div v-if="!isTargetDetected" class="scan-hint">
+                    <div class="scan-hint">
                         請對準掃描點
                     </div>
                     <a-nft
