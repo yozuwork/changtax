@@ -44,11 +44,7 @@
                             smoothTolerance="0.01"
                             smoothThreshold="5"
                             image-tracker-2>
-                            <a-entity
-                                gltf-model="https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf"
-                                scale="5 5 5"
-                                position="50 150 0">
-                            </a-entity>
+                            
                         </a-nft>
 
 
