@@ -9,7 +9,7 @@
                     arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_color; maxDetectionRate: 60;">
                     <a-nft
                         type="nft"
-                        url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/tracking_target/marker"
+                        url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/markers/marker-1.png"
                         smooth="true"
                         smoothCount="2"
                         smoothTolerance="0.01"
@@ -26,7 +26,7 @@
                     <a-marker-camera></a-marker-camera>
                 </a-scene>
 
-                   `,document.querySelector("a-scene").addEventListener("touchstart",function(a){if(a.touches.length===1){let o=document.querySelector("video");o&&o.focus()}}),this.initAR(),i.play()}else if(this.KeepPage_name=="arpage02"){localStorage.setItem("keepPage",!1),this.viewPage="arpage02";const e=document.querySelector(".arpage02");e.innerHTML=`
+                   `,this.initAR(),i.play()}else if(this.KeepPage_name=="arpage02"){localStorage.setItem("keepPage",!1),this.viewPage="arpage02";const e=document.querySelector(".arpage02");e.innerHTML=`
                          <a-scene
                         v-if="viewPage == 'arpage02' "
                         class="arbox02"
@@ -38,7 +38,7 @@
 
                         <a-nft
                             type="nft"
-                            url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/tracking_target/home"
+                            url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/markers/marker-2.png"
                             smooth="true"
                             smoothCount="10"
                             smoothTolerance="0.01"
