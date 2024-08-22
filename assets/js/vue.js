@@ -209,9 +209,102 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             initAR() {
                 const vm = this;
+                var detected_times = 0;
                 AFRAME.registerComponent('image-tracker-1', {
                     init: function () {
                         console.log("image-tracker-1 init");
+                        // 使用 MutationObserver 監測 #arjs-video 的生成
+                        const observer = new MutationObserver((mutationsList, observer) => {
+                            const video = document.getElementById('arjs-video');
+                            if (video) {
+                                observer.disconnect(); // 停止監聽
+                
+                                video.addEventListener('play', () => {
+                                    const referenceImage = document.getElementById('referenceImage-1');
+                                    const canvas = document.createElement('canvas');
+                                    const ctx = canvas.getContext('2d');
+                
+                                    // 加載參考圖像作為基準
+                                    let referenceMat = cv.imread(referenceImage);
+                
+                                    // 轉為灰階
+                                    cv.cvtColor(referenceMat, referenceMat, cv.COLOR_RGBA2GRAY);
+                
+                                    // 使用 ORB 特徵檢測器
+                                    let orb = new cv.ORB();
+                
+                                    // 提取參考圖像的關鍵點和描述符
+                                    let referenceKeypoints = new cv.KeyPointVector();
+                                    let referenceDescriptors = new cv.Mat();
+                                    orb.detectAndCompute(referenceMat, new cv.Mat(), referenceKeypoints, referenceDescriptors);
+                
+                                    function processFrame() {
+                                        try {
+                                            // 從視頻中截取畫面
+                                            canvas.width = video.videoWidth;
+                                            canvas.height = video.videoHeight;
+                                            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                                    
+                                            // 將截取的畫面轉為 OpenCV Mat 格式
+                                            let frameMat = cv.imread(canvas);
+                                            if (frameMat.empty()) {
+                                                throw new Error('Frame Mat is empty!');
+                                            }
+                                            cv.cvtColor(frameMat, frameMat, cv.COLOR_RGBA2GRAY);
+                                    
+                                            // 檢測視頻畫面的關鍵點和描述符
+                                            let frameKeypoints = new cv.KeyPointVector();
+                                            let frameDescriptors = new cv.Mat();
+                                            orb.detectAndCompute(frameMat, new cv.Mat(), frameKeypoints, frameDescriptors);
+                                    
+                                            // 確保描述符不為空
+                                            if (frameDescriptors.empty()) {
+                                                throw new Error('Frame Descriptors are empty!');
+                                            }
+                                    
+                                            // 特徵點匹配
+                                            let bf = new cv.BFMatcher(cv.NORM_HAMMING, true);
+                                            let matches = new cv.DMatchVector();
+                                            bf.match(referenceDescriptors, frameDescriptors, matches);
+                                    
+                                            // 計算匹配的數量
+                                            const matchCount = matches.size();
+                                    
+                                            // 設定一個匹配數量的閾值來判斷是否有成功辨識到目標
+                                            if (matchCount >= 33) {
+                                                detected_times++;
+                                                console.log(`Number of matches: ${matchCount}`);
+                                                console.log("Target detected!======================================");
+                                            }
+                                    
+                                            // 清理內存
+                                            frameMat.delete();
+                                            frameKeypoints.delete();
+                                            frameDescriptors.delete();
+                                            matches.delete();
+                                        } catch (error) {
+                                            console.error("Error during frame processing:", error);
+                                        } finally {
+                                            // 確保每次處理後內存都被釋放
+                                            requestAnimationFrame(processFrame);
+                                        }
+
+                                        if (detected_times >= 3) {
+                                            localStorage.setItem('KeepPage_name', '');
+                                            vm.changeViewPage('poster', true);
+                                            music.play(); // Ensure music plays when changing viewPage to 'poster'
+                                            console.log("image-tracker-1 detected");
+                                        }
+                                    }
+                
+                                    // 開始處理每一幀
+                                    requestAnimationFrame(processFrame);
+                                });
+                            }
+                        });
+                
+                        // 開始監測 DOM 中是否出現了 #arjs-video
+                        observer.observe(document.body, { childList: true, subtree: true });
                     },
                     tick: function () {
                         if (this.el.object3D.visible) {
@@ -225,9 +318,102 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             initAR02() {
                 const vm = this;
+                var detected_times = 0;
                 AFRAME.registerComponent('image-tracker-2', {
                     init: function () {
                         console.log("image-tracker-2 init");
+                        // 使用 MutationObserver 監測 #arjs-video 的生成
+                        const observer = new MutationObserver((mutationsList, observer) => {
+                            const video = document.getElementById('arjs-video');
+                            if (video) {
+                                observer.disconnect(); // 停止監聽
+                
+                                video.addEventListener('play', () => {
+                                    const referenceImage = document.getElementById('referenceImage-2');
+                                    const canvas = document.createElement('canvas');
+                                    const ctx = canvas.getContext('2d');
+                
+                                    // 加載參考圖像作為基準
+                                    let referenceMat = cv.imread(referenceImage);
+                
+                                    // 轉為灰階
+                                    cv.cvtColor(referenceMat, referenceMat, cv.COLOR_RGBA2GRAY);
+                
+                                    // 使用 ORB 特徵檢測器
+                                    let orb = new cv.ORB();
+                
+                                    // 提取參考圖像的關鍵點和描述符
+                                    let referenceKeypoints = new cv.KeyPointVector();
+                                    let referenceDescriptors = new cv.Mat();
+                                    orb.detectAndCompute(referenceMat, new cv.Mat(), referenceKeypoints, referenceDescriptors);
+                
+                                    function processFrame() {
+                                        try {
+                                            // 從視頻中截取畫面
+                                            canvas.width = video.videoWidth;
+                                            canvas.height = video.videoHeight;
+                                            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                                    
+                                            // 將截取的畫面轉為 OpenCV Mat 格式
+                                            let frameMat = cv.imread(canvas);
+                                            if (frameMat.empty()) {
+                                                throw new Error('Frame Mat is empty!');
+                                            }
+                                            cv.cvtColor(frameMat, frameMat, cv.COLOR_RGBA2GRAY);
+                                    
+                                            // 檢測視頻畫面的關鍵點和描述符
+                                            let frameKeypoints = new cv.KeyPointVector();
+                                            let frameDescriptors = new cv.Mat();
+                                            orb.detectAndCompute(frameMat, new cv.Mat(), frameKeypoints, frameDescriptors);
+                                    
+                                            // 確保描述符不為空
+                                            if (frameDescriptors.empty()) {
+                                                throw new Error('Frame Descriptors are empty!');
+                                            }
+                                    
+                                            // 特徵點匹配
+                                            let bf = new cv.BFMatcher(cv.NORM_HAMMING, true);
+                                            let matches = new cv.DMatchVector();
+                                            bf.match(referenceDescriptors, frameDescriptors, matches);
+                                    
+                                            // 計算匹配的數量
+                                            const matchCount = matches.size();
+                                    
+                                            // 設定一個匹配數量的閾值來判斷是否有成功辨識到目標
+                                            if (matchCount >= 80) {
+                                                detected_times++;
+                                                console.log(`Number of matches: ${matchCount}`);
+                                                console.log("Target detected!======================================");
+                                            }
+                                    
+                                            // 清理內存
+                                            frameMat.delete();
+                                            frameKeypoints.delete();
+                                            frameDescriptors.delete();
+                                            matches.delete();
+                                        } catch (error) {
+                                            console.error("Error during frame processing:", error);
+                                        } finally {
+                                            // 確保每次處理後內存都被釋放
+                                            requestAnimationFrame(processFrame);
+                                        }
+
+                                        if (detected_times >= 3) {
+                                            console.log("detected_times: ", detected_times);
+                                            // localStorage.setItem('KeepPage_name', '');
+                                            // vm.changeViewPage('video-view', true);
+                                            // console.log("image-tracker-2 detected");
+                                        }
+                                    }
+                
+                                    // 開始處理每一幀
+                                    requestAnimationFrame(processFrame);
+                                });
+                            }
+                        });
+                
+                        // 開始監測 DOM 中是否出現了 #arjs-video
+                        observer.observe(document.body, { childList: true, subtree: true });
                     },
                     tick: function () {
                         if (this.el.object3D.visible) {
@@ -332,7 +518,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         renderer="logarithmicDepthBuffer: true;"
                         embedded
                         device-orientation-permission-ui="enabled: false"
-                        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+                        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix;">
 
                         <a-nft
                             type="nft"
@@ -342,15 +528,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             smoothTolerance="0.01"
                             smoothThreshold="5"
                             image-tracker-1>
-                            <a-entity
-                                gltf-model="https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf"
-                                scale="5 5 5"
-                                position="50 150 0">
-                            </a-entity>
                         </a-nft>
 
 
-                        <a-entity camera></a-entity>
+                        <a-entity camera="zoom: 3"></a-entity>
                         </a-scene>
                    `;
                    this.initAR();
@@ -361,14 +542,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     this.viewPage = 'arpage02';
                     const arpage02 = document.querySelector('.arpage02');
                     arpage02.innerHTML = `
-                         <a-scene
+                    <a-scene
                         v-if="viewPage == 'arpage02' "
                         class="arbox02"
                         vr-mode-ui="enabled: false;"
                         renderer="logarithmicDepthBuffer: true;"
                         embedded
                         device-orientation-permission-ui="enabled: false"
-                        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+                        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix;">
 
                         <a-nft
                             type="nft"
@@ -378,16 +559,11 @@ document.addEventListener('DOMContentLoaded', function () {
                             smoothTolerance="0.01"
                             smoothThreshold="5"
                             image-tracker-2>
-                            <a-entity
-                                gltf-model="https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf"
-                                scale="5 5 5"
-                                position="50 150 0">
-                            </a-entity>
                         </a-nft>
 
 
                         <a-entity camera></a-entity>
-                        </a-scene>
+                    </a-scene>
                     `;
                     this.initAR02();
                     music.play();

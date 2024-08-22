@@ -5,9 +5,3 @@ import './assets/images/s1.png';
 import './assets/images/s2.png';
 import './assets/images/s3.png';
 import './assets/images/bg.mp3';
-
-
-
-
-console.log("Hello world!");
-//
