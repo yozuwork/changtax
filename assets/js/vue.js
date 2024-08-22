@@ -388,8 +388,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                             // 計算匹配的數量
                                             const matchCount = matches.size();
                                     
-                                            console.log(`Number of matches: ${matchCount}`);
-
                                             // 設定一個匹配數量的閾值來判斷是否有成功辨識到目標
                                             if (matchCount >= 135) {
                                                 console.log(`Number of matches: ${matchCount}`);
