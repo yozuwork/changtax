@@ -12,13 +12,13 @@
                         type="nft"
                         url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/markers/marker-1"
                         smooth="true"
-                        smoothCount="10"
+                        smoothCount="5"
                         smoothTolerance="0.01"
                         smoothThreshold="5"
                         image-tracker-1>
                         <a-entity
                             gltf-model="https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf"
-                            scale="5 5 5"
+                            scale="3 3 3"
                             position="50 150 0">
                         </a-entity>
                     </a-nft>
