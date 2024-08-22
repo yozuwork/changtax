@@ -7,8 +7,8 @@
     <title>index</title>
    
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-    <script type="module" crossorigin src="/changtax/assets/images/index.js?v=1724307369364"></script>
-    <link rel="stylesheet" href="/changtax/assets/images/index.css?v=1724307369364">
+    <script type="module" crossorigin src="/changtax/assets/images/index.js?v=1724307807978"></script>
+    <link rel="stylesheet" href="/changtax/assets/images/index.css?v=1724307807978">
   </head>
   <body>
      <!-- 背景音乐 -->
@@ -18,8 +18,8 @@
    </audio>
     <div class="mt-0 mt-xl-7 d-none d-md-block"></div>
     <div class="wrap-content" id="app">
-      <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js?v=1724307369364"></script>
-      <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js?v=1724307369364"></script>
+      <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js?v=1724307807978"></script>
+      <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js?v=1724307807978"></script>
      
       <div class="d-none d-xl-block"><img src="/changtax/assets/images/home-title.png" alt=""></div>
         <div v-if="viewPage == 'home'" class="content home d-flex justify-content-end flex-column mb-0 mb-mb-5" >
@@ -80,7 +80,7 @@
 
  </div>
         <div class="content poster d-flex justify-content-center flex-column " v-if="viewPage === 'poster'">
-   <div> <h1 class="poster-h1 pt-6 h1 pt-lg-4 h2 w-100 text-center text-light ">- 稅務知識圖卡 - </h1></div>
+   <div> <h1 class="poster-h1 pt-6 h1 pt-xl-4 h2 w-100 text-center text-light ">- 稅務知識圖卡 - </h1></div>
     <div class="slides-container mb-3">
         <div id="slides" class="mb-3">
             <div v-for="(imageSrc, index) in slidesData" :key="index" class="slide" :class="{ active: index === currentIndex }">
