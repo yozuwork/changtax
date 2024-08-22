@@ -25,7 +25,7 @@
                         <a-entity
                         gltf-model="https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf"
                         scale="5 5 5"
-                        position="50 150 0">
+                        position="0 200 -100>
                         </a-entity>
                     </a-nft>
 
