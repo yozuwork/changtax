@@ -9,7 +9,7 @@
                     arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_color; maxDetectionRate: 60;">
                     <a-nft
                         type="nft"
-                        url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/markers/marker-1.png"
+                        url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/markers/marker-1"
                         smooth="true"
                         smoothCount="2"
                         smoothTolerance="0.01"
@@ -38,7 +38,7 @@
 
                         <a-nft
                             type="nft"
-                            url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/markers/marker-2.png"
+                            url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/markers/marker-2"
                             smooth="true"
                             smoothCount="10"
                             smoothTolerance="0.01"
