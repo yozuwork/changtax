@@ -15,7 +15,7 @@
                             smoothCount="10"
                             smoothTolerance="0.01"
                             smoothThreshold="5"
-                            image-tracker-2>
+                            image-tracker-1>
                             <a-entity
                                 gltf-model="https://yozuwork.github.io/WEBARImageTracking2.0/assets/scene.gltf"
                                 scale="5 5 5"
