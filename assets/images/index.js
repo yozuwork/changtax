@@ -8,10 +8,6 @@
                     device-orientation-permission-ui="enabled: false"
                     arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_color; maxDetectionRate: 60;"
                     @touchstart="handleFocus">
-                     <!-- 提示文字 -->
-                    <div v-show="!isTargetDetected" class="scan-hint">
-                        請對準掃描點
-                    </div>
                     <a-nft
                         type="nft"
                         url="https://yozuwork.github.io/WEBARImageTracking2.0/assets/tracking_target/marker"
