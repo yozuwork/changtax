@@ -24,8 +24,8 @@
                         position="0 200 -100>
                         </a-entity>
                     </a-nft>
-
-                    <a-entity camera></a-entity>
+                     <a-marker-camera ></a-marker-camera>   
+                    
                     </a-scene>
 
                    `,this.initAR(),i.play()}else if(this.KeepPage_name=="arpage02"){localStorage.setItem("keepPage",!1),this.viewPage="arpage02";const e=document.querySelector(".arpage02");e.innerHTML=`
