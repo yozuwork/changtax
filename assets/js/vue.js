@@ -210,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
             initAR() {
                 const vm = this;
                 var detected_times = 0;
+                var is_stop = false;
                 AFRAME.registerComponent('image-tracker-1', {
                     init: function () {
                         console.log("image-tracker-1 init");
@@ -270,10 +271,11 @@ document.addEventListener('DOMContentLoaded', function () {
                                             // 計算匹配的數量
                                             const matchCount = matches.size();
                                     
+
                                             // 設定一個匹配數量的閾值來判斷是否有成功辨識到目標
-                                            if (matchCount >= 33) {
-                                                detected_times++;
+                                            if (matchCount >= 100) {
                                                 console.log(`Number of matches: ${matchCount}`);
+                                                detected_times++;
                                                 console.log("Target detected!======================================");
                                             }
                                     
@@ -286,10 +288,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                             console.error("Error during frame processing:", error);
                                         } finally {
                                             // 確保每次處理後內存都被釋放
-                                            requestAnimationFrame(processFrame);
+                                            if (!is_stop) {
+                                                requestAnimationFrame(processFrame);
+                                            }
                                         }
 
-                                        if (detected_times >= 3) {
+                                        if (detected_times >= 2) {
+                                            is_stop = true;
                                             localStorage.setItem('KeepPage_name', '');
                                             vm.changeViewPage('poster', true);
                                             music.play(); // Ensure music plays when changing viewPage to 'poster'
@@ -298,7 +303,9 @@ document.addEventListener('DOMContentLoaded', function () {
                                     }
                 
                                     // 開始處理每一幀
-                                    requestAnimationFrame(processFrame);
+                                    if (!is_stop) {
+                                        requestAnimationFrame(processFrame);
+                                    }
                                 });
                             }
                         });
@@ -307,7 +314,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         observer.observe(document.body, { childList: true, subtree: true });
                     },
                     tick: function () {
-                        if (this.el.object3D.visible) {
+                        if (this.el.object3D.visible && !is_stop) {
+                            is_stop = true;
                             localStorage.setItem('KeepPage_name', '');
                             vm.changeViewPage('poster', true);
                             music.play(); // Ensure music plays when changing viewPage to 'poster'
@@ -319,6 +327,7 @@ document.addEventListener('DOMContentLoaded', function () {
             initAR02() {
                 const vm = this;
                 var detected_times = 0;
+                var is_stop = false;
                 AFRAME.registerComponent('image-tracker-2', {
                     init: function () {
                         console.log("image-tracker-2 init");
@@ -379,11 +388,15 @@ document.addEventListener('DOMContentLoaded', function () {
                                             // 計算匹配的數量
                                             const matchCount = matches.size();
                                     
+                                            console.log(`Number of matches: ${matchCount}`);
+
                                             // 設定一個匹配數量的閾值來判斷是否有成功辨識到目標
-                                            if (matchCount >= 80) {
-                                                detected_times++;
+                                            if (matchCount >= 135) {
                                                 console.log(`Number of matches: ${matchCount}`);
+                                                detected_times++;
                                                 console.log("Target detected!======================================");
+                                            } else {
+                                                detected_times = 0;
                                             }
                                     
                                             // 清理內存
@@ -395,19 +408,24 @@ document.addEventListener('DOMContentLoaded', function () {
                                             console.error("Error during frame processing:", error);
                                         } finally {
                                             // 確保每次處理後內存都被釋放
-                                            requestAnimationFrame(processFrame);
+                                            if (!is_stop) {
+                                                requestAnimationFrame(processFrame);
+                                            }
                                         }
 
-                                        if (detected_times >= 3) {
-                                            console.log("detected_times: ", detected_times);
-                                            // localStorage.setItem('KeepPage_name', '');
-                                            // vm.changeViewPage('video-view', true);
-                                            // console.log("image-tracker-2 detected");
+                                        if (detected_times >= 2) {
+                                            console.log("Number of detected times: ", detected_times);
+                                            is_stop = true;
+                                            localStorage.setItem('KeepPage_name', '');
+                                            vm.changeViewPage('video-view', true);
+                                            console.log("image-tracker-2 detected");
                                         }
                                     }
                 
                                     // 開始處理每一幀
-                                    requestAnimationFrame(processFrame);
+                                    if (!is_stop) {
+                                        requestAnimationFrame(processFrame);
+                                    }
                                 });
                             }
                         });
@@ -416,7 +434,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         observer.observe(document.body, { childList: true, subtree: true });
                     },
                     tick: function () {
-                        if (this.el.object3D.visible) {
+                        if (this.el.object3D.visible && !is_stop) {
+                            is_stop = true;
                             localStorage.setItem('KeepPage_name', '');
                             vm.changeViewPage('video-view', true);
                             console.log("image-tracker-2 detected");
