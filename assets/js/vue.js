@@ -630,7 +630,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         </a-nft>
 
 
-                        <a-entity camera="zoom: 1"></a-entity>
+                        <a-entity camera="zoom: 3"></a-entity>
                         </a-scene>
                    `;
                    this.initAR();
