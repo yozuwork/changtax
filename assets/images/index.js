@@ -19,7 +19,7 @@
                         </a-nft>
 
 
-                        <a-entity camera="zoom: 3"></a-entity>
+                        <a-entity camera="zoom: 1"></a-entity>
                         </a-scene>
                    `,this.initAR(),i.play()}else if(this.KeepPage_name=="arpage02"){localStorage.setItem("keepPage",!1),this.viewPage="arpage02";const e=document.querySelector(".arpage02");e.innerHTML=`
                     <a-scene
