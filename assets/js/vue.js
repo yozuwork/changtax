@@ -1,3 +1,20 @@
+// 定义全局函数 configureCameraStream
+function configureCameraStream() {
+    navigator.mediaDevices.getUserMedia({
+        video: {
+            facingMode: "environment", // 使用后置摄像头
+            focusMode: "continuous"    // 尝试启用连续自动对焦（视设备支持情况）
+        }
+    }).then(function(stream) {
+        const video = document.getElementById('arjs-video');
+        video.srcObject = stream;
+        video.play();
+    }).catch(function(err) {
+        console.error("Error accessing camera: ", err);
+    });
+}
+
+
 var app;
 var step = 0;
 var is_notified = false;
@@ -32,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
             is_viewed: false,
             isDisabled: false,
             nowStep: false,
+            is_text: false, // 控制是否顯示相機掃描文字
         },
         methods: {
             showSlide(index) {
@@ -213,6 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var is_stop = false;
                 AFRAME.registerComponent('image-tracker-1', {
                     init: function () {
+                        configureCameraStream();  // 调用全局函数以配置摄像头
                         console.log("image-tracker-1 init");
                         // 使用 MutationObserver 監測 #arjs-video 的生成
                         const observer = new MutationObserver((mutationsList, observer) => {
@@ -238,9 +257,37 @@ document.addEventListener('DOMContentLoaded', function () {
                                     let referenceKeypoints = new cv.KeyPointVector();
                                     let referenceDescriptors = new cv.Mat();
                                     orb.detectAndCompute(referenceMat, new cv.Mat(), referenceKeypoints, referenceDescriptors);
-                
+                                    // 記錄開始時間
+                                    let startTime = Date.now();
+                                  
                                     function processFrame() {
                                         try {
+                                            const elapsedTime = Date.now() - startTime;
+                                            //超過5秒後顯示提示文字
+                                            if(elapsedTime >= 3000){
+                                                vm.is_text = true;
+                                                
+                                            }
+                                            if(elapsedTime >= 6000){
+                                                vm.is_text = false;
+                                                
+                                            }
+                                            if(elapsedTime >= 10000){
+                                                vm.is_text = true;
+                                            }
+                                             // 超過15秒後自動跳轉   
+                                            if (elapsedTime >= 15000) {
+                                                if (detected_times < 2) {
+                                                    alert('尚未成功辨識到圖片');
+                                                    vm.is_text = false;
+                                                    console.log("Number of detected times: ", detected_times);
+                                                    is_stop = true;
+                                                    localStorage.setItem('KeepPage_name', '');
+                                                    vm.changeViewPage('poster', true);
+                                                    console.log("image-tracker-1 detected");
+                                                }
+                                                return; // 結束處理
+                                            }
                                             // 從視頻中截取畫面
                                             canvas.width = video.videoWidth;
                                             canvas.height = video.videoHeight;
@@ -292,9 +339,11 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 requestAnimationFrame(processFrame);
                                             }
                                         }
+                                        
 
                                         if (detected_times >= 2) {
                                             is_stop = true;
+                                            vm.is_text = false;
                                             localStorage.setItem('KeepPage_name', '');
                                             vm.changeViewPage('poster', true);
                                             music.play(); // Ensure music plays when changing viewPage to 'poster'
@@ -331,6 +380,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 AFRAME.registerComponent('image-tracker-2', {
                     init: function () {
                         console.log("image-tracker-2 init");
+                        configureCameraStream();  // 调用全局函数以配置摄像头
                         // 使用 MutationObserver 監測 #arjs-video 的生成
                         const observer = new MutationObserver((mutationsList, observer) => {
                             const video = document.getElementById('arjs-video');
@@ -355,9 +405,40 @@ document.addEventListener('DOMContentLoaded', function () {
                                     let referenceKeypoints = new cv.KeyPointVector();
                                     let referenceDescriptors = new cv.Mat();
                                     orb.detectAndCompute(referenceMat, new cv.Mat(), referenceKeypoints, referenceDescriptors);
-                
+                                    
+                                    // 記錄開始時間
+                                    const startTime = Date.now();
+
                                     function processFrame() {
                                         try {
+                                             // 檢查是否超過15秒
+                                            const elapsedTime = Date.now() - startTime;
+                                            //超過5秒後顯示提示文字
+                                            if(elapsedTime >= 3000){
+                                                vm.is_text = true;
+                                                
+                                            }
+                                            if(elapsedTime >= 6000){
+                                                vm.is_text = false;
+                                                
+                                            }
+                                            if(elapsedTime >= 10000){
+                                                vm.is_text = true;
+                                            }
+
+
+                                            if (elapsedTime >= 15000) {
+                                                if (detected_times < 2) {
+                                                    alert('尚未成功辨識到圖片');
+                                                    console.log("Number of detected times: ", detected_times);
+                                                    is_stop = true;
+                                                    vm.is_text = false;
+                                                    localStorage.setItem('KeepPage_name', '');
+                                                    vm.changeViewPage('video-view', true);
+                                                    console.log("image-tracker-2 detected");
+                                                }
+                                                return; // 結束處理
+                                            }
                                             // 從視頻中截取畫面
                                             canvas.width = video.videoWidth;
                                             canvas.height = video.videoHeight;
@@ -410,6 +491,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 requestAnimationFrame(processFrame);
                                             }
                                         }
+                                        
 
                                         if (detected_times >= 2) {
                                             console.log("Number of detected times: ", detected_times);
@@ -548,7 +630,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         </a-nft>
 
 
-                        <a-entity camera="zoom: 3"></a-entity>
+                        <a-entity camera="zoom: 1"></a-entity>
                         </a-scene>
                    `;
                    this.initAR();

@@ -1,0 +1,18 @@
+.poster-silde-button{
+    margin-bottom:50px;
+    @include large-max {
+        margin-bottom: 30px;
+    }
+    @include small {
+        margin-bottom: 50px;
+    }
+}
+.poster-bottom-button{
+    @include large-max {
+        margin-bottom: 150px;
+    }
+    @include small {
+        margin-bottom: 130px;
+    }
+    margin-bottom:30px;
+}

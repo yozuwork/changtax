@@ -35,6 +35,7 @@ $color-contrast-ratio: 4.5 !default;
 @import 'components/qa';
 @import 'components/results';
 @import 'components/iframe';
+@import 'components/poster';
 
 
 
@@ -45,7 +46,10 @@ $color-contrast-ratio: 4.5 !default;
     overflow-x: hidden;
     margin-left: 0 !important;
     margin-top: 0 !important;
-    
+    z-index: 1 !important;
+    @include large-max{
+        background: linear-gradient(180deg, #FFFFFF 0%, #A4D5EE 50%);
+    }
   }
 // 其他樣式 ..
 .content {
@@ -56,14 +60,16 @@ $color-contrast-ratio: 4.5 !default;
     position: relative ;
     overflow-x: hidden;
     padding-bottom: 20px;
-    @include large-medium {
-        width: 550px;
+    @include large-max {
+        width: 450px;
+        height: 816px;
         min-height: 100svh;
         padding-bottom: 0px;
 
     }
     @include small {
         width: 100%;
+        height: 680px;
         min-height: 100svh;
         z-index: 10000;
         margin-left: 0 !important;
@@ -107,9 +113,3 @@ $color-contrast-ratio: 4.5 !default;
 }
 
 
-.poster-page {
-    @include small {
-       width: 100vw;
-       height: 100vh;
-    }
-}
