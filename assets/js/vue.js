@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     app = new Vue({
-        el: '#app',
+        el: '#app', 
         data: {
-            viewPage: 'home', // 默认显示的页面
+            viewPage: 'home', // 默认显示  的页面
             KeepPage_name: localStorage.getItem('KeepPage_name') || false,  //主要紀錄要保持的頁面
             keepPage: localStorage.getItem('keepPage') || false, // 此為在ar頁面 切換時的上下頁是否在刷新後保持當前頁面 
             phone_number: '',
