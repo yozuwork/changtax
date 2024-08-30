@@ -606,6 +606,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
             },
+            showModal() {
+                if (this.viewPage === 'poster') {
+                    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                    myModal.show();
+                }
+            },
         },
         watch: {
             viewPage(newPage) {
@@ -698,6 +704,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 else if(this.KeepPage_name == 'poster'){
                     localStorage.setItem('keepPage', false);
                     this.viewPage = 'poster';
+                    this.showModal();
                    
                    
                     music.play();
@@ -707,11 +714,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     this.viewPage = 'video-view';
                     music.play();
                 }
-                window.onload = () => {
-                    if (this.viewPage === 'poster') {
-                      alert('請點選完三張圖卡即可到下一關');
-                    }
-                  };
+                
+                
             }
             // Automatically play music if viewPage is not 'home'
             if (this.viewPage !== 'home') {
