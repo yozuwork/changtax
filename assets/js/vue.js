@@ -78,9 +78,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             },
             prevSlide() {
-                this.currentIndex = (this.currentIndex - 1 + this.slidesData.length) % this.slidesData.length;
+                if(this.currentIndex == this.slidesData.length - 1){
+                    alert(`已經可以前往下一關囉,可點選數字的部分查看已看過的圖卡`);
+                    
+                    return;
+                }
+                if(this.currentIndex > 0){
+                    this.currentIndex -- ;
+                }
+                
             },
             nextSlide() {
+                
                 if (this.currentIndex < this.slidesData.length - 1) {
                     if(this.currentIndex >= 1){
                         alert('已經可以前往下一關囉');
