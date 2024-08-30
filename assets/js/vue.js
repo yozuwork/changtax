@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     app = new Vue({
         el: '#app',
         data: {
-            viewPage: 'results',
+            viewPage: 'home', // 默认显示的页面
             KeepPage_name: localStorage.getItem('KeepPage_name') || false,  //主要紀錄要保持的頁面
             keepPage: localStorage.getItem('keepPage') || false, // 此為在ar頁面 切換時的上下頁是否在刷新後保持當前頁面 
             phone_number: '',
@@ -55,8 +55,13 @@ document.addEventListener('DOMContentLoaded', function () {
             showSlide(index) {
                 if (index === this.slidesData.length - 1) {
                     // If the last slide is selected, show the alert and set is_viewed to true /
-                    alert('已經可以前往下一關囉');
-                    this.is_viewed = true;
+                    if(this.currentIndex >= 1){
+                        alert('已經可以前往下一關囉');
+                    }else{
+                        alert('第二張圖卡尚未觀看喔');
+                        return;
+                    }
+                    
                 }
                 
                 if (this.currentIndex === this.slidesData.length - 1) {
@@ -77,7 +82,11 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             nextSlide() {
                 if (this.currentIndex < this.slidesData.length - 1) {
+                    if(this.currentIndex >= 1){
+                        alert('已經可以前往下一關囉');
+                    }
                     this.currentIndex++;
+                   
                 } else {
                     alert('已經可以前往下一關囉');
                     this.is_viewed = true; // You can also set this to enable the next action.
@@ -680,6 +689,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 else if(this.KeepPage_name == 'poster'){
                     localStorage.setItem('keepPage', false);
                     this.viewPage = 'poster';
+                   
+                   
                     music.play();
                 }
                 else if(this.KeepPage_name == 'video-view'){
@@ -687,6 +698,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     this.viewPage = 'video-view';
                     music.play();
                 }
+                window.onload = () => {
+                    if (this.viewPage === 'poster') {
+                      alert('請點選完三張圖卡即可到下一關');
+                    }
+                  };
             }
             // Automatically play music if viewPage is not 'home'
             if (this.viewPage !== 'home') {
@@ -730,6 +746,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
             });
-        }
+        },
+       
     });
 });
