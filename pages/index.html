@@ -1,44 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant-TW">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>index</title>
-   
+    <title>稅務知識全攻略，互動學習新體驗 - 彰化縣地方稅務局</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
   </head>
   <body>
-     <!-- 背景音乐 -->
-
     <audio id="background-music"  loop>
       <source src="../assets/images/bg.mp3" type="audio/mp3">
-   </audio>
+    </audio>
+
     <div class="wrap-content" id="app">
       <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
       <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
       <script src="https://js.netmet.tech/opencv.js"></script>
 
       <div class="d-none d-xxl-block"><img src="../assets/images/home-title.png" alt=""></div>
-        <%- include('./layout/home'); -%>
-        <%- include('./layout/instructions01'); -%>
-        <%- include('./layout/instructions02'); -%>
-        <%- include('./layout/arpage'); -%>
-        <%- include('./layout/poster'); -%>
-        <%- include('./layout/arpage02'); -%>
-        <%- include('./layout/video-view'); -%>
-        <%- include('./layout/qa01'); -%>
-        <%- include('./layout/qa02'); -%>
-        <%- include('./layout/qa03'); -%>
-        <%- include('./layout/qa04'); -%>
-        <%- include('./layout/qa05'); -%>
-        <%- include('./layout/results'); -%>
-        <%- include('./layout/fina-page'); -%>
-        <div class="d-none d-xxl-block"><img src="../assets/images/home-title.png" alt=""></div>
-          
+      <%- include('./layout/home'); -%>
+      <%- include('./layout/instructions01'); -%>
+      <%- include('./layout/instructions02'); -%>
+      <%- include('./layout/arpage'); -%>
+      <%- include('./layout/poster'); -%>
+      <%- include('./layout/arpage02'); -%>
+      <%- include('./layout/video-view'); -%>
+      <%- include('./layout/qa01'); -%>
+      <%- include('./layout/qa02'); -%>
+      <%- include('./layout/qa03'); -%>
+      <%- include('./layout/qa04'); -%>
+      <%- include('./layout/qa05'); -%>
+      <%- include('./layout/results'); -%>
+      <%- include('./layout/fina-page'); -%>
+      <div class="d-none d-xxl-block"><img src="../assets/images/home-title.png" alt=""></div>
     </div>
-    </div>
-    <footer ></footer>
+
+    <footer></footer>
   
     <script type="module" src="../main.js"></script>
     <img id="referenceImage-1" src="../assets/images/extra-marker-1.png?v=20240822001" style="display: none;" />
