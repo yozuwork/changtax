@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             }
                         });
                 
-                        // 開始監測 DOM 中是否出現了 #arjs-video
+                        // 開始監測 DOM 中是否出現了 #arjs-video 123
                         observer.observe(document.body, { childList: true, subtree: true });
                     },
                     tick: function () {
