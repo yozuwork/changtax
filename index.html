@@ -1,36 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant-TW">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>index</title>
-   
+    <title>稅務知識全攻略，互動學習新體驗 - 彰化縣地方稅務局</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-    <script type="module" crossorigin src="/changtax/assets/images/index.js?v=1724394664598"></script>
-    <link rel="stylesheet" href="/changtax/assets/images/index.css?v=1724394664598">
+    <script type="module" crossorigin src="/changtax/assets/images/index.js?v=1725331021609"></script>
+    <link rel="stylesheet" href="/changtax/assets/images/index.css?v=1725331021609">
   </head>
   <body>
-     <!-- 背景音乐 -->
-
     <audio id="background-music"  loop>
       <source src="/changtax/assets/images/bg.mp3" type="audio/mp3">
-   </audio>
-    <div class="mt-0 mt-xxl-7 d-none d-xxl-block"></div>
+    </audio>
+
     <div class="wrap-content" id="app">
-      <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js?v=1724394664598"></script>
-      <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js?v=1724394664598"></script>
-      <script src="https://js.netmet.tech/opencv.js?v=1724394664598"></script>
+      <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js?v=1725331021609"></script>
+      <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js?v=1725331021609"></script>
+      <script src="https://js.netmet.tech/opencv.js?v=1725331021609"></script>
 
       <div class="d-none d-xxl-block"><img src="/changtax/assets/images/home-title.png" alt=""></div>
-        <div v-if="viewPage == 'home'" class="content home d-flex justify-content-end flex-column mb-0 mb-xxl-5" >
+      <div v-if="viewPage == 'home'" class="content home d-flex justify-content-end flex-column mb-0 mb-xxl-5" >
     <div class="d-flex justify-content-center">
         <button @click="changeViewPage('instructions01',true)" class="btn btn-primary px-9 py-3 mb-5" type="button">
             開始體驗
         </button>
     </div>
 </div>
-<!-- -->        <div v-if="viewPage == 'instructions01'" class="content instructions01 d-flex justify-content-end flex-column " >
+<!-- -->      <div v-if="viewPage == 'instructions01'" class="content instructions01 d-flex justify-content-end flex-column " >
     <div class="d-flex justify-content-center">
         <button @click="changeViewPage('home')" class="btn btn-sm btn-secondary py-3 mb-5 me-3 d-flex justify-content-center align-items-center" type="button">
             上一步
@@ -39,7 +36,7 @@
             下一步
         </button>
     </div>
-</div>        <div v-if="viewPage == 'instructions02'" class="content instructions02 d-flex justify-content-end flex-column " >
+</div>      <div v-if="viewPage == 'instructions02'" class="content instructions02 d-flex justify-content-end flex-column " >
     <div class="d-flex justify-content-center mt-5">
         <button @click="changeViewPage('instructions01')" class="btn btn-sm btn-secondary py-3 mb-5 me-3 d-flex justify-content-center align-items-center" type="button">
             上一步
@@ -48,7 +45,7 @@
             下一步
         </button>
     </div>
-</div>        <div v-if="viewPage === 'arpage'" class="content ar-content  d-flex flex-column align-items-center">
+</div>      <div v-if="viewPage === 'arpage'" class="content ar-content  d-flex flex-column align-items-center">
     <div class="ar-img-title " style="z-index: 5;">
         <img src="/changtax/assets/images/home-title.png" alt="Title Image">
     </div>
@@ -81,7 +78,7 @@
 
 
  </div>
-        <div class="content poster d-flex justify-content-center flex-column " v-if="viewPage === 'poster'">
+      <div class="content poster d-flex justify-content-center flex-column " v-if="viewPage === 'poster'">
    <div> <h1 class="poster-h1 pt-6 h1 pt-xl-6 h2 w-100 text-center text-light ">- 稅務知識圖卡 - </h1></div>
     <div class="slides-container ">
         <div id="slides" class="mb-4">
@@ -104,8 +101,40 @@
         <button @click="changeViewPage('arpage','back')" class="btn btn-sm btn-secondary py-3  me-3 d-flex justify-content-center align-items-center" type="button">返回</button>
         <button @click="changeViewPage('arpage02',true)" class="btn btn-sm btn-primary py-3  d-flex justify-content-center align-items-center" type="button">開始答題</button>
     </div>
+   
+
+
 </div>
-<!-- -->        
+<!-- dsd-->
+<!-- Modal -->
+ <style>
+    .modal {
+        z-index: 9999999999999999999999999 !important;
+        position: absolute !important;
+    }
+ </style>   
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">稅務知識圖卡</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                請點選完三張圖卡即可到下一關
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal">明白了</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js?v=1725331021609"></script>
+
+      
 
 
 
@@ -141,27 +170,27 @@
 </div>
 <!-- AR - -->
 <!-- AR -->
-        <div class="content poster d-flex flex-column align-items-center pt-3 " v-if="viewPage === 'video-view'">
+      <div class="content poster d-flex flex-column align-items-center pt-3 " v-if="viewPage === 'video-view'">
     <div><h1 class="h2 text-center text-light py-3 py-sm-4">- 稅務知識影片 -</h1></div>
     <div class="iframe-container mb-5" >
         <iframe id="youtubeVideo1" src="https://www.youtube.com/embed/emtg3JN4x_o?enablejsapi=1" 
                 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
         </iframe>
-        <p class="text-light text-shadow  text-center fw-bolder" style=" letter-spacing: 2px;">113新三隻小豬稅務篇</p>
+        <p class="text-light text-shadow  text-center fw-bolder" style=" letter-spacing: 2px;">113年房屋稅新制重點</p>
     </div>
     <div class="iframe-container" >
         <iframe id="youtubeVideo2" src="https://www.youtube.com/embed/PdGfWuaT_hA?enablejsapi=1" 
                 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <p class="text-light text-shadow  text-center fw-bolder" style=" letter-spacing: 2px;">113年房屋稅新制重點</p>
+        <p class="text-light text-shadow  text-center fw-bolder" style=" letter-spacing: 2px;">113新三隻小豬稅務篇</p>
     </div>
     <div class="mt-auto d-flex justify-content-center"> 
         <button @click="changeViewPage('arpage02')" class="btn btn-sm btn-secondary px-5 py-3 mb-5 me-3 d-flex justify-content-center align-items-center" type="button">返回</button>
         <button @click="nextPage" id="nextPage" class="btn btn-sm btn-primary px-5 py-3 mb-5 d-flex justify-content-center align-items-center" type="button">開始答題</button>
     </div>
 </div>
-        <div v-if="viewPage === 'qa01'">
+      <div v-if="viewPage === 'qa01'">
     
     <div class="content poster d-flex justify-content-start flex-column align-items-center">
         <div class="resultbox correct" style="z-index: 999;"> <img src="/changtax/assets/images/correct.png" alt=""></div>
@@ -171,19 +200,19 @@
                 <h1 class="h3 text-center text-light py-4 mt-2">- 租稅互動問答 -</h1>
             </div>
             <div class="qa-text py-5 px-3 text-light mb-3">
-                Q1 房屋稅新制自 113 年 7 月起施行，房屋稅改為按年課徵，如有變更房屋使用情形，需於每年幾月幾日前向當地主管稽徵機關提出申請 ?
+                Q1房屋稅新制自113年7月起施行，房屋稅改為按年課徵，如有變更房屋使用情形，需於每年幾月幾日前向當地主管稽徵機關提出申請?
             </div>
             <button class="ansbox w-100 text-light py-2 mb-3 text-start px-3" @click="checkAnswer(true,$event)">
-                A. 3 月 22 日
+                A.3月22日
             </button>
             <button class="ansbox w-100 text-light py-2 mb-3 text-start px-3" @click="checkAnswer(false,$event)">
-                B. 5 月 31 日
+                B.5月1日
             </button>
             <button class="ansbox w-100 text-light py-2 mb-3 text-start px-3" @click="checkAnswer(false,$event)">
-                C. 7 月 31 日
+                C.7月31日
             </button>
             <button class="ansbox w-100 text-light py-2 mb-3 text-start px-3" @click="checkAnswer(false,$event)">
-                D. 9 月 22 日
+                D.9月22日
             </button>
         </div>
         <div class="mb-auto " style="width: 95%;">
@@ -199,7 +228,7 @@
     </div>
 </div>
 
-        <div v-if="viewPage === 'qa02'">
+      <div v-if="viewPage === 'qa02'">
     
     <div class="content poster d-flex justify-content-start flex-column align-items-center">
         <div class="resultbox correct" style="z-index: 999;"> <img src="/changtax/assets/images/correct.png" alt=""></div>
@@ -209,7 +238,7 @@
                 <h1 class="h3 text-center text-light py-4 mt-2">- 租稅互動問答 -</h1>
             </div>
             <div class="qa-text py-5 px-3 text-light mb-3">
-                Q2 房屋稅新制之自住房屋稅率，須具備哪些要件 ?
+                Q2房屋稅新制之自住房屋稅率，須具備哪些要件?
             </div>
             <button class="ansbox w-100 text-light py-2 mb-3 text-start px-3" @click="checkAnswer(false,$event)">
                 A.本人、配偶或直系親屬辦竣戶籍登記且供其實際居住
@@ -218,7 +247,7 @@
                 B.無出租或無營業
             </button>
             <button class="ansbox w-100 text-light py-2 mb-3 text-start px-3" @click="checkAnswer(false,$event)">
-                C.本人、配偶及未成年子女全國 3 戶以內
+                C.本人、配偶及未成年子女全國3戶以內
             </button>
             <button class="ansbox w-100 text-light py-2 mb-3 text-start px-3" @click="checkAnswer(true,$event)">
                 D.以上皆是
@@ -237,7 +266,7 @@
     </div>
 </div>
 
-        <div v-if="viewPage === 'qa03'">
+      <div v-if="viewPage === 'qa03'">
     
     <div class="content poster d-flex justify-content-start flex-column align-items-center">
         <div class="resultbox correct" style="z-index: 999;"> <img src="/changtax/assets/images/correct.png" alt=""></div>
@@ -246,10 +275,7 @@
             <div>
                 <h1 class="h3 text-center text-light py-4 mt-2">- 租稅互動問答 -</h1>
             </div>
-            <div class="qa-text py-5 px-3 text-light mb-3">
-                Q3 如全國僅 1 戶自住房屋(其房屋現值在一定金額以下者)且本人、
-                配偶或直系親屬已辦竣戶籍登記，於房屋稅新制實行後，其自住用稅
-                率由原先 1.2%降為_% ?
+            <div class="qa-text py-5 px-3 text-light mb-3">Q3如全國僅1戶自住房屋(其房屋現值在一定金額以下者)且本人、配偶或直系親屬已辦竣戶籍登記，於房屋稅新制實行後，其自住用稅率由原先1.2%降為__%?
             </div>
             <button class="ansbox w-100 text-light py-2 mb-3 text-start px-3" @click="checkAnswer(false,$event)">
                 A.1.1%
@@ -277,7 +303,7 @@
     </div>
 </div>
 
-        <div v-if="viewPage === 'qa04'">
+      <div v-if="viewPage === 'qa04'">
     
     <div class="content poster d-flex justify-content-start flex-column align-items-center">
         <div class="resultbox correct" style="z-index: 999;"> <img src="/changtax/assets/images/correct.png" alt=""></div>
@@ -285,9 +311,9 @@
         <div style="width: 95%;">
             <div>
                 <h1 class="h3 text-center text-light py-4 mt-2">- 租稅互動問答 -</h1>
-            </div>
+            </div><!-- -->
             <div class="qa-text py-5 px-3 text-light mb-3">
-                Q4 惦惦吃三碗公飯的豬大哥 到底是用了什麼 APP 可以 24 小時兌領
+                Q4惦惦吃三碗公飯的豬大哥到底是用了什麼APP可以24小時兌領統一發票中獎獎金? 
             </div>
             <button class="ansbox w-100 text-light py-2 mb-3 text-start px-3" @click="checkAnswer(false,$event)">
                 A.發發發票怪獸
@@ -296,7 +322,7 @@
                 B.理財小幫手
             </button>
             <button class="ansbox w-100 text-light py-2 mb-3 text-start px-3" @click="checkAnswer(true,$event)">
-                C.統一發票兌獎
+                C.統一發票兌獎APP
             </button>
             <button class="ansbox w-100 text-light py-2 mb-3 text-start px-3" @click="checkAnswer(false,$event)">
                 D.雲端發票王
@@ -315,7 +341,7 @@
     </div>
 </div>
 
-        <div v-if="viewPage === 'qa05'">
+      <div v-if="viewPage === 'qa05'">
     
     <div class="content poster d-flex justify-content-start flex-column align-items-center">
         <div class="resultbox correct" style="z-index: 999;"> <img src="/changtax/assets/images/correct.png" alt=""></div>
@@ -325,9 +351,7 @@
                 <h1 class="h3 text-center text-light py-4 mt-2">- 租稅互動問答 -</h1>
             </div>
             <div class="qa-text py-5 px-3 text-light mb-3">
-                Q5 地方稅務局不會傳送非「gov.tw」的網址供民眾點擊繳稅，如接
-                獲地方稅務局通知稅金逾期未繳之可疑簡訊，可打 165 詐騙專線電話
-                求證?
+                Q5地方稅務局不會傳送非「gov.tw」的網址供民眾點擊繳稅，如接獲地方稅務局通知稅金逾期未繳之可疑簡訊，可打165詐騙專線電話求證?
             </div>
             <button class="ansbox w-100 text-light py-2 mb-3 text-start px-3" @click="checkAnswer(true,$event)">
                 A.對
@@ -349,7 +373,7 @@
     </div>
 </div>
 
-        <div class="content poster d-flex flex-column align-items-center" v-if="viewPage === 'results'">
+      <div class="content poster d-flex flex-column align-items-center" v-if="viewPage === 'results'">
     <div class="mt-4"><img src="/changtax/assets/images/home-title.png" alt=""></div>
     <div class="results-text mt-3 pt-2 pb-3 px-3 text-light mb-3 d-flex flex-column align-items-center">
         <p class="fs-5">恭喜您完成答題</p>
@@ -376,7 +400,7 @@
 </script>    
 
 
-        
+      
 <div class="content poster d-flex flex-column align-items-center" v-if="viewPage === 'fina-page'">
     <div class="mt-4"><img src="/changtax/assets/images/home-title.png" alt=""></div>
     <div class="results-text mt-3 pt-2 pb-3 px-3 text-light mb-3 d-flex flex-column align-items-center">
@@ -388,13 +412,13 @@
     </div>
     <div class="text-start text-shadow text-light" style="width: 95%; font-size: 14px;">
         填寫注意事項 <br>
-        1.請抽獎人確實填寫手機末三碼，範例如下： <br>
+        1.請抽獎人確實填寫手機末五碼，範例如下： <br>
         Ex.0987-654-321，請填寫321在上方輸入匡內。 <br>
         2. 根據活動請正確填寫手機號碼，如填寫錯誤無法正確核實身份，抽獎資格則視為作廢。 <br>
         3.確認填寫正確後，點選下方按鈕，系統即會產出專屬抽獎流水號。
     </div>
     <div class="mb-auto d-flex justify-content-center">
-        <button onclick="window.location.href='https://www.facebook.com/pages/%E5%BD%B0%E5%8C%96%E7%A8%85%E5%B1%80/253416044757459'" class="btn btn-primary px-7 py-3 mb-4" type="button">前往FB抽獎</button>
+        <button onclick="window.location.href='https://www.facebook.com/ChangTax'" class="btn btn-primary px-7 py-3 mb-4" type="button">前往FB抽獎</button>
     </div>
 </div>
 
@@ -426,11 +450,10 @@
 }
 </script>    
 
-        <div class="d-none d-xxl-block"><img src="/changtax/assets/images/home-title.png" alt=""></div>
-          
+      <div class="d-none d-xxl-block"><img src="/changtax/assets/images/home-title.png" alt=""></div>
     </div>
-    </div>
-    <footer ></footer>
+
+    <footer></footer>
   
     
     <img id="referenceImage-1" src="/changtax/assets/images/extra-marker-1.png?v=20240822001" style="display: none;" />
