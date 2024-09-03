@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
             isDisabled: false,
             nowStep: false,
             is_text: false, // 控制是否顯示相機掃描文字
+            
         },
         methods: {
             showSlide(index) {
@@ -610,6 +611,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (this.viewPage === 'poster') {
                     var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
                     myModal.show();
+                 
+                    
                 }
             },
         },
